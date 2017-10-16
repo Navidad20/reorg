@@ -9,6 +9,8 @@ module.exports = (app) => {
     res.json({ message: 'API Initialized!' });
   });
 
+  app.get('/api/teachers', teacherRouter);
+
   // Catch all other Api calls
   app.get('/api/*', (req, res) => { res.sendStatus(404); });
 };
