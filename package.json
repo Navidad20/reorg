@@ -5,13 +5,20 @@
   "proxy": "http://localhost:3001",
   "sass": "sass --watch src/styles/scss:src/styles/css",
   "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
+    "express-session": "^1.15.6",
+    "material-ui": "^0.19.4",
     "mongoose": "^4.12.1",
     "node-sass": "^4.5.3",
     "node-sass-chokidar": "^0.0.3",
     "nodemon": "^1.12.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
+    "webfontloader": "^1.6.28",
     "yarn": "^1.2.1"
   },
   "scripts": {
@@ -23,5 +30,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "react-toolbox": "2.0.0-beta.6",
+    "react-toolbox-themr": "^1.0.2"
   }
 }

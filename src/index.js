@@ -1,8 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import WebFont from 'webfontloader';
 import './styles/css/index.css';
-import App from './App';
+
+import Root from './containers/Root';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+WebFont.load({
+  google: {
+    families: ['Roboto:300,400,500', 'sans-serif']
+  }
+});
+
+render(
+  <Router>
+    <Root/>
+  </Router>,
+  document.getElementById('root')
+);
+
 registerServiceWorker();

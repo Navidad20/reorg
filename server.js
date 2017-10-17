@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const config = require('./config');
-// const configPassport = require('./app/configLdapPassport');
+const authentication = require('./app/authentication');
 const routes = require('./app/routes');
 
 // Create App
@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Configure passport authentication
-// configPassport(app);
+authentication(app, mongoose);
 
 // Setting headers to Prevent Errors from Cross Origin Resource Sharing
 app.use((req, res, next) => {

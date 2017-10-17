@@ -1,7 +1,7 @@
 const express = require('express');
-const artifact = require('../handlers/teacherHandler');
+const artifact = require('../handlers/userHandler');
 
-const TeacherRouter = express.Router();
+const UserRouter = express.Router();
 
 // Routes for /api/artifacts
 // TeacherRouter.route('/')
@@ -14,4 +14,4 @@ const TeacherRouter = express.Router();
 //   .get(artifact.singleGet)
 //   .delete(artifact.singleDelete);
 
-module.exports = TeacherRouter;
+module.exports = UserRouter;
