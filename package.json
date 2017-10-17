@@ -4,6 +4,22 @@
   "private": true,
   "proxy": "http://localhost:3001",
   "sass": "sass --watch src/styles/scss:src/styles/css",
+  "reactToolbox": {
+    "include": [
+      "LINK",
+      "NAVIGATION",
+      "DATE_PICKER",
+      "APP_BAR"
+    ],
+    "customProperties": {
+      "animation-duration": "0.3s",
+      "color-accent": "var(--palette-pink-a200)",
+      "color-accent-dark": "var(--palette-pink-700)",
+      "color-primary-contrast": "var(--color-dark-contrast)",
+      "color-accent-contrast": "var(--color-dark-contrast)"
+    },
+    "output": "src/toolbox"
+  },
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",
     "express-session": "^1.15.6",
@@ -14,8 +30,8 @@
     "nodemon": "^1.12.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react": "15.6.2",
+    "react-dom": "15.6.2",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
     "webfontloader": "^1.6.28",
@@ -24,6 +40,7 @@
   "scripts": {
     "build-css": "node-sass-chokidar src/styles/scss -o src/styles/css",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "toolbox": "react-toolbox-themr",
     "start": "react-scripts start",
     "server": "nodemon server.js",
     "start-dev": "npm run watch-css | react-scripts start",

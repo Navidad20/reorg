@@ -4,17 +4,18 @@ import { Route, Switch } from 'react-router-dom';
 
 import NoMatch from '../components/NotFoundPage';
 import Test from '../components/Test';
-import App from '../containers/App';
+import Landing from '../components/Landing';
+import App from './App';
 
 const Root = (props) => {
   return (
-    <main>
+    <App>
       <Switch>
-        <Route exact path="/" component={App} />
+        <Route exact path="/" component={Landing} />
         <Route exact path="/test" component={Test} />
         <Route component={NoMatch} />
       </Switch>
-    </main>
+    </App>
   );
 }
 

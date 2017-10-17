@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from '../logo.svg';
+import Button from 'react-toolbox/lib/button/Button';
 
-class App extends Component {
+class Landing extends Component {
   render() {
     return (
       <div className="App">
@@ -10,11 +11,12 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> MAGIC HAPPENS AGAIN.
+          To get started, edit <code>src/Landing.js</code> MAGIC HAPPENS AGAIN.
         </p>
+        <Button label="Testing Button" raised primary></Button>
       </div>
     );
   }
 }
 
-export default App;
+export default Landing;
