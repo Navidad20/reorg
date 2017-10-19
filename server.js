@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Configure passport authentication
-authentication(app, mongoose);
+//authentication(app, mongoose);
 
 // Setting headers to Prevent Errors from Cross Origin Resource Sharing
 app.use((req, res, next) => {

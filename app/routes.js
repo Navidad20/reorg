@@ -9,7 +9,8 @@ module.exports = (app) => {
     res.json({ message: 'API Initialized!' });
   });
 
-  app.get('/api/users', userRouter);
+  app.get('/test', (req, res) => { res.sendStatus(200); });
+  app.use('/api/users', userRouter);
 
   // Catch all other Api calls
   app.get('/api/*', (req, res) => { res.sendStatus(404); });
