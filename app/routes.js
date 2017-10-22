@@ -1,16 +1,19 @@
 const userRouter = require('./routers/userRouter');
-// const studentRouter = require();
-// const taskRouter = require();
+const courseRouter = require('./routers/courseRouter');
+const taskRouter = require('./routers/taskRouter');
+const authRouter = require('./routers/authRouter');
 
-module.exports = (app) => {
+module.exports = (app, passport) => {
 
   // Routing for API check
   app.get('/', (req, res) => {
     res.json({ message: 'API Initialized!' });
   });
 
-  app.get('/test', (req, res) => { res.sendStatus(200); });
+  app.use('/', authRouter(passport));
   app.use('/api/users', userRouter);
+  app.use('/api/courses', courseRouter);
+  app.use('/api/tasks', taskRouter);
 
   // Catch all other Api calls
   app.get('/api/*', (req, res) => { res.sendStatus(404); });

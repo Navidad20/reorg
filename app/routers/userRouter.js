@@ -5,13 +5,13 @@ const UserRouter = express.Router();
 
 // Routes for /api/users
 UserRouter.route('/')
-  .get(user.singleGet)
-  .post(user.singlePost);
-   //.put(artifact.singlePut);
+  .get(user.allGet)
+  .post(user.singlePost)
+  .put(user.singlePut);
 
-// // Routes for /api/artifacts/:artifact
-// TeacherRouter.route('/:artifact')
-//   .get(artifact.singleGet)
-//   .delete(artifact.singleDelete);
+// Routes for /api/users/:user
+UserRouter.route('/:user')
+  .get(user.singleGet)
+  .delete(user.singleDelete);
 
 module.exports = UserRouter;

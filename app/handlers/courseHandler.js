@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const Course = require('../models/course');
 
 module.exports = {
   allGet,
@@ -8,39 +8,37 @@ module.exports = {
   singleDelete
 };
 
-// Get all users
+// Get all courses
 function allGet(req, res) {
   if (true) {
-    User.find({}, (error, users) => {
+    Course.find({}, (error, courses) => {
       if (error) res.status(500).send(error);
-      else res.json(users);
+      else res.json(courses);
     });
   } else {
     res.sendStatus(401);
   }
 }
 
-// Get a single user
+// Get a single course
 function singleGet(req, res) {
   if (true) {
-    const username = req.params.user;
-    User.find({ username: username }, (error, user) => {
+    const courseId = req.params.courseId;
+    Course.find({ _id: courseId }, (error, course) => {
       if (error) res.status(500).send(error);
-      else if (user.length === 0) res.sendStatus(404);
-      else res.json(user);
+      else if (course.length === 0) res.sendStatus(404);
+      else res.json(course);
     });
   } else {
     res.sendStatus(401);
   }
 }
 
-// Post a single user
+// Post a single course
 function singlePost(req, res) {
   if (true) {
-    const newUser = req.body;
-    console.log(req.body);
-    //newUser.user = req.user.uid;
-    User.create(newUser,
+    const newCourse = req.body;
+    Course.create(newCourse,
       (error, response) => {
         if (error) res.status(500).send(error);
         else res.status(201).json(response);
@@ -50,14 +48,14 @@ function singlePost(req, res) {
   }
 }
 
-// Update a single user
+// Update a single course
 function singlePut(req, res) {
   if (true) {
-    const username = req.body.username;
-    const user = req.body;
-    User.update(
-      { username: username },
-      { $set: user },
+    const courseId = req.body.courseId;
+    const course = req.body;
+    Course.update(
+      { _id: courseId },
+      { $set: course },
       (error, response) => {
         if (error) res.status(500).send(error);
         else if (response.n === 0) res.sendStatus(404);
@@ -68,11 +66,11 @@ function singlePut(req, res) {
   }
 }
 
-// Delete a single user
+// Delete a single course
 function singleDelete(req, res) {
   if (true) {
-    const username = req.params.user;
-    User.remove({ username: username }, (error, response) => {
+    const courseId = req.body.courseId;
+    Course.remove({ _id: courseId }, (error, response) => {
       if (error) res.status(500).send(error);
       else if (response.result.n === 0) res.sendStatus(404);
       else res.sendStatus(200);

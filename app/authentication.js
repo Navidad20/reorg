@@ -1,15 +1,15 @@
-﻿const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+﻿const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const User = require('./models/user');
 const bCrypt = require('bcrypt-nodejs');
+const MemoryStore = session.MemoryStore;
 
-module.exports = (app, mongoose) => {
+module.exports = (app, passport, mongoose) => {
 
   app.use(session({
     secret: 'reorg-pkey',
     name: 'authentication',
-    store: mongoose.connection,
+    store: new MemoryStore(),
     resave: true,
     saveUninitialized: true
   }));
@@ -17,15 +17,15 @@ module.exports = (app, mongoose) => {
   app.use(passport.session());
 
   passport.serializeUser((user, done) => {
-    done(null, user._id);
+    done(null, user.username);
   })
 
   passport.deserializeUser((id, done) => {
     done(null, { id });
   });
 
-  passport.use('login', new LocalStrategy({ passReqToCallbac: true }, login));
-  passport.use('signup', new LocalStrategy({ passReqToCallbac: true }, signup));
+  passport.use('login', new LocalStrategy({ passReqToCallback: true }, login));
+  passport.use('signup', new LocalStrategy({ passReqToCallback: true }, signup));
 };
 
 function isValidPassword(user, password) {
