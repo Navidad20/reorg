@@ -57,24 +57,22 @@ function createHash(password) {
 
 function signup(req, username, password, done) {
   findOrCreateUser = () => {
-    User.findOne({ 'username': username }, function (error, user) {
+    User.findOne({ 'username': username }, (error, user) => {
       if (error) return done(error);
-
       if (user) {
         console.log('Username in use: ' + username);
         return done(null, false, req.flash('message', 'User Already Exists'));
       } else {
-        let newUser = new User();
-
+        const newUser = req.body;
         newUser.username = username;
         newUser.password = createHash(password);
-        newUser.firstName = req.param('firstName');
-        newUser.lastName = req.param('lastName');
 
-        newUser.save((error) => {
-          if (error) throw error;
-          console.log('User Registration succesful');
-          return done(null, newUser);
+        User.create(newUser, (error, response) => {
+          if (error) return done(error);
+          else {
+            console.log('User Registration Successful');
+            return done(null, newUser)
+          }
         });
       }
     });

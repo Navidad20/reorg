@@ -38,8 +38,6 @@ function singleGet(req, res) {
 function singlePost(req, res) {
   if (true) {
     const newUser = req.body;
-    console.log(req.body);
-    //newUser.user = req.user.uid;
     User.create(newUser,
       (error, response) => {
         if (error) res.status(500).send(error);

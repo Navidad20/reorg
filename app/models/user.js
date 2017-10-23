@@ -18,8 +18,19 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  isTeacher: {
+    type: Boolean,
+    required: true
+  },
   courses: {
     type: [String],
+    default: []
+  },
+  taskList: {
+    type: [{
+      taskID: String,
+      complete: Boolean
+    }],
     default: []
   },
   totalReward: {
