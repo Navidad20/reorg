@@ -6,9 +6,9 @@ const authRouter = require('./routers/authRouter');
 module.exports = (app, passport) => {
 
   // Routing for API check
-  app.get('/', (req, res) => {
-    res.json({ message: 'API Initialized!' });
-  });
+  // app.get('/', (req, res) => {
+  //   res.json({ message: 'API Initialized!' });
+  // });
 
   app.use('/', authRouter(passport));
   app.use('/api/users', userRouter);
@@ -17,4 +17,7 @@ module.exports = (app, passport) => {
 
   // Catch all other Api calls
   app.get('/api/*', (req, res) => { res.sendStatus(404); });
+
+  // route to handle all angular requests
+  app.get('/*', function(req, res) { res.sendFile('index.html', { root: './public' }) });
 };

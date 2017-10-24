@@ -22,6 +22,9 @@ mongoose.connect(process.env.MONGO_URL || config.mongodb.localhost, {
   useMongoClient : true
 });
 
+// Set static files
+app.use(express.static('./public'));
+
 // Configure API to use BodyParser and handle json data
 app.use(cookieParser());
 app.use(flash());
