@@ -1,12 +1,18 @@
 const User = require('../models/user');
 
 module.exports = {
+  current,
   allGet,
   singleGet,
   singlePost,
   singlePut,
   singleDelete
 };
+
+// Get current user
+function current(req, res) {
+  res.send(req.user);
+}
 
 // Get all users
 function allGet(req, res) {
@@ -26,7 +32,6 @@ function singleGet(req, res) {
     const username = req.params.user;
     User.find({ username: username }, (error, user) => {
       if (error) res.status(500).send(error);
-      else if (user.length === 0) res.sendStatus(404);
       else res.json(user);
     });
   } else {

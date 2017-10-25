@@ -5,7 +5,8 @@ angular.module('reOrg', [
   'ui.router',
   'ngMaterial',
   'appRoutes', 
-  'MainCtrl', 
+  'httpService',
+  'AuthCtrl', 
   'NerdCtrl', 
   'NerdService'
 ]);

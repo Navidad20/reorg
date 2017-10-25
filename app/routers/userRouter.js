@@ -9,6 +9,9 @@ UserRouter.route('/')
   .post(user.singlePost)
   .put(user.singlePut);
 
+UserRouter.route('/current')
+  .get(user.current);
+
 // Routes for /api/users/:user
 UserRouter.route('/:user')
   .get(user.singleGet)

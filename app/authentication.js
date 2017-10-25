@@ -17,11 +17,12 @@ module.exports = (app, passport, mongoose) => {
   app.use(passport.session());
 
   passport.serializeUser((user, done) => {
-    done(null, user.username);
+    const data = { username : user.username, isTeacher: user.isTeacher }
+    done(null, data);
   })
 
   passport.deserializeUser((id, done) => {
-    done(null, { id });
+    done(null, id );
   });
 
   passport.use('login', new LocalStrategy({ passReqToCallback: true }, login));

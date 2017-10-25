@@ -1,13 +1,134 @@
-body { 
-  padding-top:30px;
+.note-table {
+  margin-bottom: 1em;
 }
 
-/* .login-form {
-  md-card {
-    padding: 0!important;
+html {
+  height: 100%;
+}
 
-    md-card-title {
-      background-color: blue;
-    }
+body {
+  min-height: 100%;
+  position: relative;
+}
+
+.splash nav {
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.splash nav h1 {
+  color: #428bca;
+  line-height: 50px;
+  font-size: 1.8em;
+  font-weight: bold;
+  margin: 0;
+  display: inline-block;
+}
+
+.splash nav span {
+  float: right;
+  font-size: 1.8em;
+  line-height: 50px;
+}
+
+@media screen and (max-width: 650px) {
+  .splash nav span {
+    display: none;
   }
-} */
+}
+
+.splash .fa-big {
+  font-size: 10em;
+}
+
+.splash .container {
+  padding-bottom: 100px;
+}
+
+.splash .row:first-child ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+} 
+
+.splash .row:first-child ul li {
+    text-align: center;
+}
+
+.splash .row:first-child ul li p {
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+.splash .row:first-child ul li:after {
+  content: '';
+  display: block;
+  margin: auto;
+  height: 2px;
+  width: 0px;
+  background: transparent;
+  transition: width .5s ease, background-color .5s ease;
+}
+
+.splash .row:first-child ul li:hover:after {
+  width: 100%;
+  background: #428bca;
+}
+
+.splash .row:nth-child(2) {
+  padding: 10px;
+  border-top: solid 1px #ccc;
+}
+
+.splash a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.splash .row:first-child {
+  margin-top: 40vh;
+  transform: translateY(-50%);
+}
+
+@media screen and (max-width: 991px) {
+  .splash .row:first-child {
+    padding-top: 50px;
+    margin-top: 10%;
+    transform: translateY(0);
+  }
+}
+ 
+.splash .fa-big {
+  font-size: 6em;
+}
+
+.splash .container ul li {
+    margin-bottom: 20px;
+}
+
+.splash footer {
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  bottom: 0;
+  text-align: center;
+  font-style: italic;
+  background: #f8f8f8;
+  font-size: 1.5em;
+}
+
+.splash footer h1, .splash footer h2 {
+  font-size: 0.8em;
+}
+
+.item-blurb {
+  text-align:center;
+}
+
+.inline {
+  display:inline-block;
+  margin-right:5px;
+}

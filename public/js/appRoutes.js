@@ -22,29 +22,24 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         views: {
           'header': {
             templateUrl: 'views/header.html',
-            controller: 'MainController',
+            controller: 'RegCtrl',
             controllerAs: 'vm'
           },
           'content': {
-            templateUrl: 'views/home.html',
-            controller: 'MainController',
+            templateUrl: 'views/splash.html',
+            controller: 'RegCtrl',
             controllerAs: 'vm'
           }
         }
       })
 
       // Splash Page Home
-      .state('login', {
-        url: '/login',
+      .state('home.login', {
+        url: 'login',
         views: {
-          'header': {
-            templateUrl: 'views/header.html',
-            controller: 'MainController',
-            controllerAs: 'vm'
-          },
-          'content': {
-            templateUrl: 'views/login.html',
-            controller: 'MainController',
+          'content@': {
+            templateUrl: 'views/auth/login.html',
+            controller: 'LoginCtrl',
             controllerAs: 'vm'
           }
         }

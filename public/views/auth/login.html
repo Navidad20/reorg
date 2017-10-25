@@ -1,0 +1,21 @@
+<md-content layout="row" layout-align="space-around" layout-padding="layout-padding" ng-cloak="ng-cloak" class="login-form">
+  <md-card flex="50" flex-gt-sm="50" flex-gt-md="33">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2><span>Login</span></h2>
+      </div>
+    </md-toolbar>
+    <md-card-content>
+      <form name="Form">
+        <md-input-container class="md-block">
+          <input type="text" name="username" ng-model="vm.userData.username" placeholder="Username" required=""/>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <input type="password" name="password" ng-model="vm.userData.password" placeholder="Password" required=""/>
+        </md-input-container>
+        <md-button ng-disabled="!Form.$valid" ng-click="vm.submit()" class="md-raised md-primary">&nbsp Login &nbsp</md-button>
+        <md-button ng-click="vm.cancel()" class="md-raised md-danger">Cancel</md-button>
+      </form>
+    </md-card-content>
+  </md-card>
+</md-content>

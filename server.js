@@ -30,7 +30,7 @@ app.use(cookieParser());
 app.use(flash());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(morgan('combined'));
+app.use(morgan('dev'));
 
 // Setting headers to Prevent Errors from Cross Origin Resource Sharing
 app.use((req, res, next) => {
