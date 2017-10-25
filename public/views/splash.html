@@ -4,21 +4,25 @@
 			<div class="row">
 				<ul>
 					<li class="col-md-3 col-md-offset-2">
-						<a ui-sref="home.Capabilities">
-							<i class="fa material-icons fa-big" aria-hidden="true">school</i>
-							<h1>Teachers</h1>
-							<p>For teachers looking to manage their courses</p>
-						</a>
+						<md-card>
+							<a ui-sref="home.Capabilities">
+								<i class="fa material-icons fa-big" aria-hidden="true">school</i>
+								<h1>Teachers</h1>
+								<p>For teachers looking to manage their courses</p>
+							</a>
+						</md-card>
 						<md-button class="md-primary md-raised" ng-click="vm.openTeacher($event)" >
-								Register Teacher
-							</md-button>
+							Register Teacher
+						</md-button>
 					</li>
 					<li class="col-md-3 col-md-offset-2">
-						<a href="https://discuss.mitre.org/c/proposed-lessons-learned">
-							<i class="fa material-icons fa-big" aria-hidden="true">mode_edit</i>
-							<h1>Students</h1>
-							<p>For students looking to complete tasks</p>
-						</a>
+						<md-card>
+							<a href="https://discuss.mitre.org/c/proposed-lessons-learned">
+								<i class="fa material-icons fa-big" aria-hidden="true">mode_edit</i>
+								<h1>Students</h1>
+								<p>For students looking to complete tasks</p>
+							</a>
+						</md-card>
 						<md-button class="md-primary md-raised" ng-click="vm.openStudent($event)" >
 							Register Student
 						</md-button>

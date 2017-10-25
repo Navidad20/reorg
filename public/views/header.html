@@ -3,17 +3,19 @@
     <br>
     <md-toolbar class="md-hue-2">
       <div class="md-toolbar-tools">
-        <md-button class="md-icon-button" aria-label="Settings" ng-disabled="false">
+        <!-- <md-button class="md-icon-button" aria-label="Settings" ng-disabled="false">
           <i class="material-icons">menu</i>
-        </md-button>
+        </md-button> -->
 
-        <h2 flex md-truncate>ReOrg</h2>
+        <h2 flex md-truncate>
+          <a ui-sref="home">ReOrg</a>
+        </h2>
 
-        <md-button class="md-raised" aria-label="Learn More">
-          Courses
+        <md-button ng-if="vm.user.username" style="margin-left: auto" ui-sref="home" layout="row" layout-align="space-between center">
+          Hello, {{vm.user.username}}
         </md-button>
-        <md-button class="md-raised" aria-label="Favorite">
-          Profile
+        <md-button ng-if="!vm.user.username" ui-sref="home.login">
+          Login
         </md-button>
       </div>
     </md-toolbar>

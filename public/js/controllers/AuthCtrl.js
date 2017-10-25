@@ -66,15 +66,18 @@ function($state, Auth, User) {
   }
   
   User.get_current().then(function(success) {
-    vm.user = success;
-    if (success) {
-      console.log(success);
+    console.log(success)
+    if (success.data) {
+      vm.user = success.data.username;
     }
   });
 
   vm.submit = () => {
     Auth.login(vm.userData).then(function (success) {
-      console.log(success);
+      console.log(success)
+      let user = success.data.user; 
+      if (user.isTeacher) $state.go('home.teacher');
+      else $state.go('home.student');
     }, function(error) {
       alert('Invalid Login');
     });

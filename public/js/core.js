@@ -6,7 +6,7 @@ angular.module('reOrg', [
   'ngMaterial',
   'appRoutes', 
   'httpService',
-  'AuthCtrl', 
-  'NerdCtrl', 
-  'NerdService'
+  'AuthCtrl',
+  'NavCtrl',
+  'UserCtrl'
 ]);

@@ -33,13 +33,37 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         }
       })
 
-      // Splash Page Home
+      // Login Page
       .state('home.login', {
         url: 'login',
         views: {
           'content@': {
             templateUrl: 'views/auth/login.html',
             controller: 'LoginCtrl',
+            controllerAs: 'vm'
+          }
+        }
+      })
+
+      // Splash Page Home
+      .state('home.student', {
+        url: 'student',
+        views: {
+          'content@': {
+            templateUrl: 'views/student.html',
+            controller: 'StudentCtrl',
+            controllerAs: 'vm'
+          }
+        }
+      })
+
+      // Splash Page Home
+      .state('home.teacher', {
+        url: 'teacher',
+        views: {
+          'content@': {
+            templateUrl: 'views/teacher.html',
+            controller: 'TeacherCtrl',
             controllerAs: 'vm'
           }
         }
