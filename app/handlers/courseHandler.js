@@ -47,14 +47,13 @@ function singlePost(req, res) {
           const teacherID = req.body.teacherID;
           User.update(
             { _id : teacherID }, 
-            { $set }
-            (error, teacher) => {
-            if (error) res.status(500).send(error);
-            else if (course.length === 0) res.sendStatus(404);
-            else res.json(course);
-          })
-          res.status(201).json(response);
-        }
+            { $push : { courses : response._id } },
+            (error, teacherResponse) => {
+              if (error) res.status(500).send(error);
+              else if (teacherResponse.ln === 0) res.sendStatus(404);
+              else res.status(201).json(response);
+          });
+        };
       });
   } else {
     res.sendStatus(401);

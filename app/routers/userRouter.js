@@ -12,6 +12,9 @@ UserRouter.route('/')
 UserRouter.route('/current')
   .get(user.current);
 
+UserRouter.route('/course')
+  .put(user.singlePutCourse);
+
 // Routes for /api/users/:user
 UserRouter.route('/:user')
   .get(user.singleGet)

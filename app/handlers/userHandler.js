@@ -6,6 +6,7 @@ module.exports = {
   singleGet,
   singlePost,
   singlePut,
+  singlePutCourse,
   singleDelete
 };
 
@@ -61,6 +62,24 @@ function singlePut(req, res) {
     User.update(
       { username: username },
       { $set: user },
+      (error, response) => {
+        if (error) res.status(500).send(error);
+        else if (response.n === 0) res.sendStatus(404);
+        else res.sendStatus(200);
+      });
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+// Update a single user
+function singlePutCourse(req, res) {
+  if (true) {
+    const username = req.body.username;
+    const course = req.body.course;
+    User.update(
+      { username: username },
+      { $push: { courses: course } },
       (error, response) => {
         if (error) res.status(500).send(error);
         else if (response.n === 0) res.sendStatus(404);

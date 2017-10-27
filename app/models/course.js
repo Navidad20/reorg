@@ -8,7 +8,7 @@ const CourseSchema = new Schema({
   },
   description: {
     type: String,
-    default: 'N/A'
+    default: ''
   },
   teacherID: {
     type: String,
