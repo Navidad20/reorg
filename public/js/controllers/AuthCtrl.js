@@ -56,8 +56,8 @@ function($mdDialog, $scope, Auth, User) {
 
 }]);
 
-app.controller('LoginCtrl', ['$state', 'Auth', 'User',
-function($state, Auth, User) {
+app.controller('LoginCtrl', ['$state', 'Auth', 'User', '$rootScope',
+function($state, Auth, User, $rootScope) {
   var vm = this;
 
   vm.userData = {
@@ -66,15 +66,15 @@ function($state, Auth, User) {
   }
   
   User.get_current().then(function(success) {
-    console.log(success)
-    if (success.data) {
-      vm.user = success.data.username;
+    if (success) {
+      console.log('hi', success)
+      vm.user = success.username;
     }
   });
 
   vm.submit = () => {
     Auth.login(vm.userData).then(function (success) {
-      console.log(success)
+      $rootScope.$broadcast('userLoggedIn');
       let user = success.data.user; 
       if (user.isTeacher) $state.go('home.teacher');
       else $state.go('home.student');

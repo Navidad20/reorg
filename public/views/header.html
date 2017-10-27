@@ -10,9 +10,8 @@
         <h2 flex md-truncate>
           <a ui-sref="home">ReOrg</a>
         </h2>
-
-        <md-button ng-if="vm.user.username" style="margin-left: auto" ui-sref="home" layout="row" layout-align="space-between center">
-          Hello, {{vm.user.username}}
+        <md-button ng-if="vm.user.username" ng-click="vm.logout()">
+          Logout  
         </md-button>
         <md-button ng-if="!vm.user.username" ui-sref="home.login">
           Login

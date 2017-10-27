@@ -12,15 +12,26 @@ app.factory('Auth', ['$http', '$state',
 
 }]);
 
-app.factory('User', ['$http', '$state',
-function($http, $state) {
-return {
-  get_current: function() {
-    return $http.get('/api/users/current');
-  },
-  get: function(username) {
-    return $http.get('/api/users/' + username);
+app.factory('User', ['$http', '$state', '$q',
+function($http, $state, $q) {
+  let user = {};
+  return {
+    get_current: function() {
+      if (!user.username) {
+        user = $http.get('/api/users/current')
+          .then(function(success) {
+            return success.data;
+          });
+      }
+      return user;
+    },
+    get: function(username) {
+      return $http.get('/api/users/' + username)
+      .then(function(success) {
+          return success.data;
+      }, function(error) {
+          return $q.reject(error);
+      });
+    }
   }
-}
-
 }]);

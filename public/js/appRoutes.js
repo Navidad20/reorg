@@ -22,7 +22,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         views: {
           'header': {
             templateUrl: 'views/header.html',
-            controller: 'RegCtrl',
+            controller: 'NavCtrl',
             controllerAs: 'vm'
           },
           'content': {
