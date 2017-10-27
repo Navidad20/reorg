@@ -7,6 +7,10 @@ function($timeout, $mdSidenav, User) {
   User.get_current().then(function(success) {
     vm.user = success;
   });
+
+  vm.close = function () {
+    $mdSidenav('left').close()
+  };
   
   vm.toggleLeft = buildDelayedToggler('left');
   
