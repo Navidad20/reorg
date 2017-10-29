@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const Course = require('../models/course');
+const mongoose = require('mongoose');
 
 module.exports = {
   current,
@@ -31,9 +33,17 @@ function allGet(req, res) {
 function singleGet(req, res) {
   if (true) {
     const username = req.params.user;
-    User.find({ username: username }, (error, user) => {
+    User.findOne({ username: username }, (error, user) => {
       if (error) res.status(500).send(error);
-      else res.json(user);
+      else {
+        Course.find({ _id : { $in : user.courses }}, (error, courses) => {
+          if (error) res.status(500).send(error);
+          else {
+            user.courses = courses;
+            res.json(user);
+          }
+        });
+      }
     });
   } else {
     res.sendStatus(401);
@@ -102,4 +112,16 @@ function singleDelete(req, res) {
   } else {
     res.sendStatus(401);
   }
+}
+
+function retrieveCourses(courses) {
+  let allCourses = [];
+  let prom = Course.findOne({_id: courses[0]});
+  for (let i = 0; i < courses.length; i++) {
+    prom = prom.then((error, course) => {
+      allCourses.push(course);
+      return Course.findOne({_id: courses[i+1]});
+    });
+  }
+  return prom.then((error, course) => allCourses.push(course));
 }

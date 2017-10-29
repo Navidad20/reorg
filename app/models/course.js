@@ -10,12 +10,12 @@ const CourseSchema = new Schema({
     type: String,
     default: ''
   },
-  teacherID: {
+  teacher: {
     type: String,
     required: true
   },
   tasks: {
-    type: [String],
+    type: [],
     default: []
   },
   students: {

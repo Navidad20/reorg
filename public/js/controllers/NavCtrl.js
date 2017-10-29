@@ -4,8 +4,8 @@ app.controller('NavCtrl', ['$state', 'User', '$rootScope',
 function($state, User, $rootScope) {
 	var vm = this;
 	
-	const get_user = () => {
-		User.get_current().then(function(success) {
+	const getUser = () => {
+		User.getCurrent().then(function(success) {
 			vm.user = success;
 		});
 	};
@@ -15,8 +15,8 @@ function($state, User, $rootScope) {
 	};
 
 	$rootScope.$on('userLoggedIn', function () {
-    get_user();
+    getUser();
 	});
 	
-	get_user();
+	getUser();
 }]);

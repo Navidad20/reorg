@@ -132,3 +132,7 @@ body {
   display:inline-block;
   margin-right:5px;
 }
+
+.selected-item {
+  background: #F89898;
+}

@@ -2,17 +2,18 @@ app = angular.module('AuthCtrl', []);
 app.controller('RegCtrl', ['$mdDialog', '$scope', 'Auth', 'User',
 function($mdDialog, $scope, Auth, User) {
   var vm = this;
+  vm.userData = {}
   
-  User.get_current().then(function(success) {
+  User.getCurrent().then(function(success) {
     vm.user = success;
   });
 
-  vm.userData = {
+  vm.defaultUserData = {
     firstName: '',
     lastName: '',
     username: '',
     password: '',
-  }
+  };
 
   vm.show = () => {
     $mdDialog.show(
@@ -27,19 +28,23 @@ function($mdDialog, $scope, Auth, User) {
   }
 
   vm.openStudent = function(ev) {
+    angular.copy(vm.defaultUserData, vm.userData);
     vm.userData.isTeacher = false;
     vm.show();
   };
 
   vm.openTeacher = function(ev) {
+    angular.copy(vm.defaultUserData, vm.userData);
     vm.userData.isTeacher = true;
     vm.show();
   };
 
   vm.submit = () => {
     User.get(vm.userData.username).then((success) => {
-      if (success.data.length === 0) {
+      console.log(success)
+      if (success.length === 0) {
         Auth.register(vm.userData).then((success) => {
+          $rootScope.$broadcast('userLoggedIn');
           console.log('Registered');
         });
         $mdDialog.cancel();
@@ -65,9 +70,8 @@ function($state, Auth, User, $rootScope) {
     password: ''
   }
   
-  User.get_current().then(function(success) {
+  User.getCurrent().then(function(success) {
     if (success) {
-      console.log('hi', success)
       vm.user = success.username;
     }
   });

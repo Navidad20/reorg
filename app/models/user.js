@@ -23,13 +23,14 @@ const UserSchema = new Schema({
     required: true
   },
   courses: {
-    type: [String],
+    type: [],
     default: []
   },
-  taskList: {
+  tasks: {
     type: [{
-      taskID: String,
-      complete: Boolean
+      task: String,
+      complete: Boolean,
+      task: {}
     }],
     default: []
   },

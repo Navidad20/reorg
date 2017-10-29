@@ -9,6 +9,9 @@ CourseRouter.route('/')
   .post(course.singlePost)
   .put(course.singlePut);
 
+  CourseRouter.route('/task')
+  .put(course.singlePutTask);
+
 // Routes for /api/courses/:course
 CourseRouter.route('/:course')
   .get(course.singleGet)

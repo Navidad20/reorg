@@ -1,4 +1,5 @@
 const Task = require('../models/task');
+const Course = require('../models/course');
 
 module.exports = {
   allGet,
@@ -39,9 +40,19 @@ function singlePost(req, res) {
   if (true) {
     const newTask = req.body;
     Task.create(newTask,
-      (error, response) => {
+      (error, task) => {
         if (error) res.status(500).send(error);
-        else res.status(201).json(response);
+        else res.status(201).json(task);
+        // else {
+        //   Course.update(
+        //     { _id : task.courseID },
+        //     { $push : { tasks : task._id } },
+        //     (error, response) => {
+        //       if (error) res.status(500).send(error);
+        //       else res.status(201).json(task)
+        //     }
+        //   );
+        // };
       });
   } else {
     res.sendStatus(401);

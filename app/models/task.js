@@ -10,7 +10,7 @@ const TaskSchema = new Schema({
     type: String,
     required: false
   },
-  courseID: {
+  course: {
     type: String,
     required: true
   },
@@ -25,7 +25,7 @@ const TaskSchema = new Schema({
   },
   teacherID: {
     type: String,
-    required: true
+    required: false
   },
 }, {
   timestamps: true
