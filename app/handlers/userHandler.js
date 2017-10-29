@@ -36,13 +36,17 @@ function singleGet(req, res) {
     User.findOne({ username: username }, (error, user) => {
       if (error) res.status(500).send(error);
       else {
-        Course.find({ _id : { $in : user.courses }}, (error, courses) => {
-          if (error) res.status(500).send(error);
-          else {
-            user.courses = courses;
-            res.json(user);
-          }
-        });
+        if (user) {
+          Course.find({ _id : { $in : user.courses }}, (error, courses) => {
+            if (error) res.status(500).send(error);
+            else {
+              user.courses = courses;
+              res.json(user);
+            }
+          });
+        } else {
+          res.json(user);
+        }
       }
     });
   } else {

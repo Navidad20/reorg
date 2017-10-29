@@ -68,7 +68,7 @@ function($scope, $timeout, $mdSidenav, $mdDialog, User, Course, Task) {
   vm.defaultTask = {
     title : '',
     description : '',
-    reward : 0
+    rewardValue : 0
   };
 
   function getUser() {

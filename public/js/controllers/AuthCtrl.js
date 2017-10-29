@@ -1,6 +1,6 @@
 app = angular.module('AuthCtrl', []);
-app.controller('RegCtrl', ['$mdDialog', '$scope', 'Auth', 'User',
-function($mdDialog, $scope, Auth, User) {
+app.controller('RegCtrl', ['$rootScope', '$mdDialog', '$scope', 'Auth', 'User',
+function($rootScope, $mdDialog, $scope, Auth, User) {
   var vm = this;
   vm.userData = {}
   
@@ -41,8 +41,7 @@ function($mdDialog, $scope, Auth, User) {
 
   vm.submit = () => {
     User.get(vm.userData.username).then((success) => {
-      console.log(success)
-      if (success.length === 0) {
+      if (!success) {
         Auth.register(vm.userData).then((success) => {
           $rootScope.$broadcast('userLoggedIn');
           console.log('Registered');

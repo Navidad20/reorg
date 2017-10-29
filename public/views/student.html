@@ -1,107 +1,111 @@
 <div class="container-fluid remove-space" ng-cloak>
-    <div layout="row">
+  <div layout="row">
 
-        <!-- Sidebar -->
-        <md-sidenav
-                class="md-sidenav-left"
-                md-component-id="left"
-                md-is-locked-open="$mdMedia('gt-md')"
-                md-whiteframe="4">
-            <md-toolbar layout="row" layout-align="space-between center" class="md-theme-indigo">
-                <h1 class="md-toolbar-tools">
-                    <!-- <span class="fa fa-user padded-icon"></span> -->
-                    <span> Courses</span>
-                </h1>
-                <md-button ng-click="vm.close()" class="md-icon-button" aria-label="Close Sidebar" hide-gt-md>
-                    <md-tooltip md-direction="left">Close</md-tooltip>
-                    <span class="fa fa-close"></span>
-                </md-button>
-            </md-toolbar>
-            <md-content layout-padding>
-                <md-list>
-                    <md-list-item
-                        class="clickable"
-                        ng-repeat="course in vm.userData.courses"
-                        ng-click="vm.setCourse(course._id)">
-                        {{course.title}}
-                    </md-list-item>
-                </md-list>
-            </md-content>
-        </md-sidenav>
+    <!-- Sidebar -->
+    <md-sidenav
+      class="md-sidenav-left"
+      md-component-id="left"
+      md-is-locked-open="$mdMedia('gt-md')"
+      md-whiteframe="4">
+      <md-toolbar layout="row" layout-align="space-between center" class="md-theme-indigo">
+          <h1 class="md-toolbar-tools">
+              <!-- <span class="fa fa-user padded-icon"></span> -->
+              <span> Courses</span>
+          </h1>
+          <md-button ng-click="vm.close()" class="md-icon-button" aria-label="Close Sidebar" hide-gt-md>
+              <md-tooltip md-direction="left">Close</md-tooltip>
+              <span class="fa fa-close"></span>
+          </md-button>
+      </md-toolbar>
+      <md-content layout-padding>
+        <md-list>
+          <md-list-item
+            class="clickable"
+            ng-repeat="course in vm.userData.courses"
+            ng-click="vm.setCourse(course._id)">
+            {{course.title}}
+          </md-list-item>
+          <md-list-item class="clickable" ng-click="vm.addCourse()">
+            <span class="fa fa-plus">&nbsp;</span>
+            Add Course
+          </md-list-item>
+        </md-list>
+      </md-content>
+    </md-sidenav>
 
-        <!-- Main page -->
-        <div layout="column" layout-fill layout-padding>
+    <!-- Main page -->
+    <div layout="column" layout-fill layout-padding>
 
-            <!-- Header -->
-            <div layout-padding>
-                <h3>
-                    <span class="fa fa-bank"></span>
-                    <span>Task List</span>
-                    <md-button class="md-fab md-mini md-primary" ng-click="vm.toggleLeft()" hide-gt-md>
-                        <span class="fa fa-exchange"></span>
-                    </md-button>
-                </h3>
-            </div>
+      <!-- Header -->
+      <div layout-padding>
+        <h3>
+          <span class="fa fa-bank"></span>
+          <span>Task List</span>
+          <md-button class="md-fab md-mini md-primary" ng-click="vm.toggleLeft()" hide-gt-md>
+            <span class="fa fa-exchange"></span>
+          </md-button>
+        </h3>
+      </div>
 
-            <!-- Knowledge -->
-            <md-toolbar layout="row" class="md-hue-3"  ng-if="vm.currentCourse">
-              <div class="md-toolbar-tools">
-                <span>Course:&nbsp;</span>
-                <span>{{ vm.currentCourse.title }}</span>
-              </div>
-              <div class="md-toolbar-tools" ng-if="!vm.currentCourse">
-                  No Course Selected
-              </div>
-            </md-toolbar>
-            <md-content layout="row">
-              <h4 ng-if="vm.currentCourse.tasks.length == 0">No available tasks.</h4>
-              <md-list flex="50" ng-if="vm.currentCourse.tasks.length > 0">
-                <md-list-item class="md-3-line" ng-repeat="task in vm.currentCourse.tasks" ng-click="vm.setTask(task)">
-                  <div class="md-list-item-text" layout="column">
-                    <h3>{{ task.title }}</h3>
-                  </div>
-                  <md-checkbox class="md-secondary" ng-model="task.complete"></md-checkbox>
-                </md-list-item>
-              </md-list>
-              <md-card flex="50" ng-if="vm.currentTask">
-                <md-card-title>
-                  <md-card-title-text>
-                    <span class="md-headline">{{ vm.currentTask.title }}</span>
-                  </md-card-title-text>
-                </md-card-title>
-                <md-card-content>
-                  <h5>Desctiption:</h5>
-                  <p>{{ vm.currentTask.description }}</p>
-                  <br>
-                  <h5>Reward:</h5>
-                  <p>{{ vm.currentTask.rewardValue }}</p>
-                </md-card-content>
-              </md-card>
-            </md-content>
-
-            <!-- Projects -->
-            <md-grid-list ng-if="vm.contentType == 'Projects'" md-cols-xs="1" md-cols-gt-xs="2" md-row-height="300px">
-                <md-grid-tile md-rowspan="1" md-colspan="1">
-                    <card-list
-                        layout="row"
-                        layout-align="none stretch"
-                        flex="grow"
-                        title="'Current Projects'"
-                        type="'project'"
-                        items="vm.getCurrentProjects()">
-                    </card-list>
-                </md-grid-tile>
-                <md-grid-tile md-rowspan="1" md-colspan="1">
-                    <card-list
-                        layout="row"
-                        layout-align="none stretch"
-                        flex="grow"
-                        title="'Suggested Projects'"
-                        type="'project'"
-                        items="vm.getSuggestedProjects()">
-                    </card-list>
-                </md-grid-tile>
-            </md-grid-list>
+      <!-- Knowledge -->
+      <md-toolbar layout="row" class="md-hue-3"  ng-if="vm.currentCourse">
+        <div class="md-toolbar-tools">
+          <span>Course:&nbsp;</span>
+          <span>{{ vm.currentCourse.title }}</span>
         </div>
+        <div class="md-toolbar-tools" ng-if="!vm.currentCourse">
+            No Course Selected
+        </div>
+      </md-toolbar>
+      <md-content layout="row">
+        <h4 ng-if="vm.currentCourse.tasks.length == 0">No available tasks.</h4>
+        <md-list flex="50" ng-if="vm.currentCourse.tasks.length > 0">
+          <md-list-item class="md-3-line" ng-repeat="task in vm.currentCourse.tasks" ng-click="vm.setTask(task)">
+            <div class="md-list-item-text" layout="column">
+              <h3>{{ task.title }}</h3>
+            </div>
+            <md-checkbox class="md-secondary" ng-model="task.complete"></md-checkbox>
+          </md-list-item>
+        </md-list>
+        <md-card flex="50" ng-if="vm.currentTask">
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline">{{ vm.currentTask.title }}</span>
+            </md-card-title-text>
+          </md-card-title>
+          <md-card-content>
+            <h5>Desctiption:</h5>
+            <p>{{ vm.currentTask.description }}</p>
+            <br>
+            <h5>Reward:</h5>
+            <p>{{ vm.currentTask.rewardValue }}</p>
+          </md-card-content>
+        </md-card>
+      </md-content>
+
+      <!-- Projects -->
+      <md-grid-list ng-if="vm.contentType == 'Projects'" md-cols-xs="1" md-cols-gt-xs="2" md-row-height="300px">
+          <md-grid-tile md-rowspan="1" md-colspan="1">
+              <card-list
+                  layout="row"
+                  layout-align="none stretch"
+                  flex="grow"
+                  title="'Current Projects'"
+                  type="'project'"
+                  items="vm.getCurrentProjects()">
+              </card-list>
+          </md-grid-tile>
+          <md-grid-tile md-rowspan="1" md-colspan="1">
+              <card-list
+                  layout="row"
+                  layout-align="none stretch"
+                  flex="grow"
+                  title="'Suggested Projects'"
+                  type="'project'"
+                  items="vm.getSuggestedProjects()">
+              </card-list>
+          </md-grid-tile>
+      </md-grid-list>
     </div>
+  </div>
 </div>

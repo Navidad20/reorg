@@ -19,6 +19,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
       // Splash Page Home
       .state('home', {
         url: '/',
+        authenticate: { require: false },
         views: {
           'header': {
             templateUrl: 'views/header.html',
@@ -36,6 +37,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
       // Login Page
       .state('home.login', {
         url: 'login',
+        authenticate: { require: false },
         views: {
           'content@': {
             templateUrl: 'views/auth/login.html',
@@ -48,6 +50,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
       // Splash Page Home
       .state('home.student', {
         url: 'student',
+        authenticate: { require: true, role: 'student' },
         views: {
           'content@': {
             templateUrl: 'views/student.html',
@@ -60,6 +63,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
       // Splash Page Home
       .state('home.teacher', {
         url: 'teacher',
+        authenticate: { require: true, role: 'teacher' },
         views: {
           'content@': {
             templateUrl: 'views/teacher.html',

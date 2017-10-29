@@ -10,6 +10,13 @@
         <h2 flex md-truncate>
           <a ui-sref="home">ReOrg</a>
         </h2>
+
+        <md-button ng-if="vm.user.username" ng-click="vm.logout()">
+          Task Manager  
+        </md-button>
+        <md-button ng-if="vm.user.username" ng-click="vm.logout()">
+          Game
+        </md-button>
         <md-button ng-if="vm.user.username" ng-click="vm.logout()">
           Logout  
         </md-button>
