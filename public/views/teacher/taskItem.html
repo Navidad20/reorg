@@ -1,0 +1,11 @@
+<md-list-item class="md-3-line" ng-click="vm.set(vm.task)">
+  <div class="md-list-item-text" layout="column">
+    <h3>{{ vm.task.title }}</h3>
+  </div>
+  <md-button class="md-icon-button" ng-click="vm.edit(vm.task)">
+    <i class="material-icons">mode_edit</i>
+  </md-button>
+  <md-button class="md-icon-button" ng-click="vm.delete(vm.task)">
+    <i class="material-icons">delete</i>
+  </md-button>
+</md-list-item>

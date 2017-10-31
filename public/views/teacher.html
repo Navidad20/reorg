@@ -59,17 +59,14 @@
             </md-toolbar>
             <md-content layout="row">
               <md-list flex="50">
-                <md-list-item class="md-3-line" ng-repeat="task in vm.currentCourse.tasks" ng-click="vm.setTask(task)">
-                  <div class="md-list-item-text" layout="column">
-                    <h3>{{ task.title }}</h3>
-                  </div>
-                  <md-button class="md-icon-button" ng-click="deleteTask(task)">
-                    <i class="material-icons">mode_edit</i>
-                  </md-button>
-                  <md-button class="md-icon-button" ng-click="deleteTask(task)">
-                    <i class="material-icons">delete</i>
-                  </md-button>
-                </md-list-item>
+                <div ng-repeat="task in vm.currentCourse.tasks">
+                  <teacher-task-item 
+                    task=task
+                    onSet="vm.setTask"
+                    onEdit="vm.editTask"
+                    onDelete="vm.deleteTask">
+                  </teacher-task-item>
+                </div>
                 <md-list-item  class="md-3-line" ng-click="vm.addTask()">
                   <div class="md-list-item-text" layout="row">
                     <h3>
