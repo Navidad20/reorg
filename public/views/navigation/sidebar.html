@@ -1,0 +1,23 @@
+<md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
+  <md-toolbar layout="row" layout-align="space-between center" class="md-theme-indigo">
+    <h1 class="md-toolbar-tools">
+      <!-- <span class="fa fa-user padded-icon"></span> -->
+      <span> Courses</span>
+    </h1>
+    <md-button ng-click="vm.close()" class="md-icon-button" aria-label="Close Sidebar" hide-gt-md>
+      <md-tooltip md-direction="left">Close</md-tooltip>
+      <span class="fa fa-close"></span>
+    </md-button>
+  </md-toolbar>
+  <md-content layout-padding>
+    <md-list>
+      <md-list-item class="clickable" ng-repeat="course in vm.courses" ng-click="vm.set(course._id)">
+        {{course.title}}
+      </md-list-item>
+      <md-list-item class="clickable" ng-click="vm.addCourse()">
+        <span class="fa fa-plus">&nbsp;</span>
+        Create New Course
+      </md-list-item>
+    </md-list>
+  </md-content>
+</md-sidenav>
