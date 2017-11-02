@@ -4,7 +4,8 @@ function() {
   var vm = this;
 
   vm.set = () => {
-    vm.onSet(vm.task);
+    console.log(vm.task)
+    vm.onSet({item : vm.task});
   }
   vm.edit = () => {
     vm.onEdit(vm.task);

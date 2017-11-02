@@ -91,8 +91,9 @@ function($scope, $timeout, $mdSidenav, $mdDialog, User, Course, Task) {
     });
   }
 
-  vm.setTask = function(task) {
-    vm.currentTask = task;
+  vm.setTask = function(item) {
+    console.log('hit')
+    vm.currentTask = item;
   }
 
   vm.addCourse = () => {

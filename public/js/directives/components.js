@@ -4,7 +4,7 @@ app.component('teacherTaskItem', {
   controller: 'TeacherTaskItemCtrl',
   controllerAs: 'vm',
   bindings: {
-    task: '<',
+    task: '=',
     onSet: '&',
     onDelete: '&',
     onEdit: '&'

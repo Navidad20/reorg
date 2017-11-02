@@ -62,9 +62,9 @@
                 <div ng-repeat="task in vm.currentCourse.tasks">
                   <teacher-task-item 
                     task=task
-                    onSet="vm.setTask"
-                    onEdit="vm.editTask"
-                    onDelete="vm.deleteTask">
+                    on-set="vm.setTask(item)"
+                    on-edit="vm.editTask(item)"
+                    on-delete="vm.deleteTask(item)">
                   </teacher-task-item>
                 </div>
                 <md-list-item  class="md-3-line" ng-click="vm.addTask()">
