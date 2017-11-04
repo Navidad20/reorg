@@ -29,5 +29,12 @@ module.exports = function(passport) {
     })(req, res, next);
   });
 
+  /* Handle Logout */
+  Router.get('/logout', function (req, res) {
+    req.logout();
+    req.session.destroy();
+    res.send(200);
+  });
+
   return Router;
 }

@@ -71,7 +71,7 @@ function($scope, $timeout, $mdSidenav, $mdDialog, User, Course, Task) {
     rewardValue : 0
   };
 
-  function getUser() {
+  vm.getUser = () => {
     User.get(vm.user.username).then(function(success) {
       vm.userData = success;
     });
@@ -80,7 +80,7 @@ function($scope, $timeout, $mdSidenav, $mdDialog, User, Course, Task) {
   User.getCurrent().then(function(success) {
     vm.user = success;
     if (success.username) {
-      getUser();
+      vm.getUser();
     };
   });
 
@@ -94,20 +94,6 @@ function($scope, $timeout, $mdSidenav, $mdDialog, User, Course, Task) {
   vm.setTask = function(item) {
     console.log('hit')
     vm.currentTask = item;
-  }
-
-  vm.addCourse = () => {
-    angular.copy(vm.defaultCourse, vm.newCourse)
-    vm.newCourse.teacher = vm.user.username;
-    $mdDialog.show(
-      {
-        templateUrl: "views/forms/course.html",
-        clickOutsideToClose: true,
-        scope: $scope,
-        preserveScope: true,
-        controller: function($scope) {
-       },
-    });
   }
 
   vm.addTask = () => {
@@ -124,13 +110,6 @@ function($scope, $timeout, $mdSidenav, $mdDialog, User, Course, Task) {
     });
   }
 
-  vm.submitCourse = () => {
-    Course.post(vm.newCourse).then(function(success) {
-      vm.closeDialog();
-      console.log('Course Added!')
-    })
-  };
-
   vm.submitTask = () => {
     Task.post(vm.newTask).then(function(success) {
       Course.putTask(vm.currentCourse._id, success._id).then(function(success) {
@@ -142,7 +121,7 @@ function($scope, $timeout, $mdSidenav, $mdDialog, User, Course, Task) {
   };
 
   vm.closeDialog = () => {
-    getUser();
+    vm.getUser();
     $mdDialog.cancel();
   };
 

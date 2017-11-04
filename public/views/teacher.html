@@ -2,7 +2,7 @@
     <div layout="row">
 
         <!-- Sidebar -->
-        <md-sidenav
+        <!-- <md-sidenav
                 class="md-sidenav-left"
                 md-component-id="left"
                 md-is-locked-open="$mdMedia('gt-md')"
@@ -30,7 +30,13 @@
                 </md-list-item>
               </md-list>
             </md-content>
-        </md-sidenav>
+        </md-sidenav> -->
+        <sidebar
+          user="vm.user"
+          courses="vm.userData.courses"
+          on-set="vm.setCourse(item)"
+          on-refresh="vm.getUser()">
+        </sidebar>
 
         <!-- Main page -->
         <div layout="column" layout-fill layout-padding>

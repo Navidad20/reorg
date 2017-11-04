@@ -7,6 +7,9 @@ app.factory('Auth', ['$http', '$state',
     },
     login: function(userData) {
       return $http.post('/login', userData);
+    },
+    logout: function() {
+      return $http.get('/logout');
     }
   }
 

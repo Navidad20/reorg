@@ -10,16 +10,16 @@ app.component('teacherTaskItem', {
     onEdit: '&'
   }
 });
-// app.component('sidebar', {
-//   templateUrl: 'views/navigation/sidebar.html',
-//   controller: 'SideBarCtrl',
-//   controllerAs: 'vm',
-//   bindings: {
-//     user: '<',
-//     courses: '<',
-//     onSet: '&',
-//     onCreate: '&',
-//     onAdd: '&',
-//     onRefresh: '&'
-//   }
-// });
+app.component('sidebar', {
+  templateUrl: 'views/navigation/sidebar.html',
+  controller: 'SideBarCtrl',
+  controllerAs: 'vm',
+  bindings: {
+    user: '<',
+    courses: '<',
+    onSet: '&',
+    onCreate: '&',
+    onAdd: '&',
+    onRefresh: '&'
+  }
+});

@@ -1,7 +1,7 @@
 app = angular.module('NavCtrl', []);
 
-app.controller('NavCtrl', ['$state', 'User', '$rootScope',
-function($state, User, $rootScope) {
+app.controller('NavCtrl', ['$state', '$rootScope', 'User', 'Auth',
+function($state, $rootScope, User, Auth) {
 	var vm = this;
 	
 	const getUser = () => {
@@ -11,7 +11,9 @@ function($state, User, $rootScope) {
 	};
 
 	vm.logout = () => {
-		console.log('Not Implemented');
+		Auth.logout().then(function(success) {
+			if (success) $state.go('home');
+		})
 	};
 
 	$rootScope.$on('userLoggedIn', function () {
