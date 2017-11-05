@@ -84,7 +84,6 @@ function($scope, $timeout, $mdSidenav, $mdDialog, Auth, User, Course, Task) {
   }
 
   vm.setTask = function(item) {
-    console.log('hit')
     vm.currentTask = item;
   }
 
@@ -107,13 +106,13 @@ function($scope, $timeout, $mdSidenav, $mdDialog, Auth, User, Course, Task) {
       Course.putTask(vm.currentCourse._id, success._id).then(function(success) {
         vm.setCourse(vm.currentCourse._id);
         vm.closeDialog();
+        vm.getUser();
         console.log('Task Added!')
       });
     });
   };
 
   vm.closeDialog = () => {
-    vm.getUser();
     $mdDialog.cancel();
   };
 

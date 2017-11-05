@@ -69,9 +69,9 @@ function($state, Auth, User, $rootScope) {
 
   vm.submit = () => {
     Auth.login(vm.userData).then(function (success) {
-      $rootScope.$broadcast('userLoggedIn');
       let user = success.data.user;
       Auth.setUser(user);
+      $rootScope.$broadcast('userLoggedIn');
       if (user.isTeacher) $state.go('home.teacher');
       else $state.go('home.student');
     }, function(error) {
