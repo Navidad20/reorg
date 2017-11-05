@@ -1,18 +1,14 @@
 app = angular.module('UserCtrl', []); 
 
-app.controller('StudentCtrl', ['$timeout', '$mdSidenav', '$mdDialog', 'User', 'Course', 'Task',
-function($timeout, $mdSidenav, $mdDialog, User, Course, Task) {
+app.controller('StudentCtrl', ['$timeout', '$mdSidenav', '$mdDialog', 'Auth', 'User', 'Course', 'Task',
+function($timeout, $mdSidenav, $mdDialog, Auth, User, Course, Task) {
   var vm = this;
+  vm.user = Auth.getUser();
   vm.currentCourse = null;
   vm.currentTask = null;
 
-  User.getCurrent().then(function(success) {
-    vm.user = success;
-    if (success.username) {
-      User.get(success.username).then(function(success) {
-        vm.userData = success;
-      });
-    };
+  User.get(vm.user.username).then(function(success) {
+    vm.userData = success;
   });
 
   vm.setCourse = function(course) {
@@ -52,9 +48,10 @@ function($timeout, $mdSidenav, $mdDialog, User, Course, Task) {
   };
 }]);
 
-app.controller('TeacherCtrl', ['$scope', '$timeout', '$mdSidenav', '$mdDialog', 'User', 'Course', 'Task',
-function($scope, $timeout, $mdSidenav, $mdDialog, User, Course, Task) {
+app.controller('TeacherCtrl', ['$scope', '$timeout', '$mdSidenav', '$mdDialog', 'Auth', 'User', 'Course', 'Task',
+function($scope, $timeout, $mdSidenav, $mdDialog, Auth, User, Course, Task) {
   var vm = this;
+  vm.user = Auth.getUser();
   vm.currentCourse = null;
   vm.currentTask = null;
   vm.newCourse = {};
@@ -77,12 +74,7 @@ function($scope, $timeout, $mdSidenav, $mdDialog, User, Course, Task) {
     });
   };
 
-  User.getCurrent().then(function(success) {
-    vm.user = success;
-    if (success.username) {
-      vm.getUser();
-    };
-  });
+  vm.getUser();
 
   vm.setCourse = function(course) {
     Course.get(course).then(function(success) {

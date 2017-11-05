@@ -1,6 +1,7 @@
 app = angular.module('httpService', []);
 app.factory('Auth', ['$http', '$state',
-  function($http, $state) {
+function($http, $state) {
+  let user;
   return {
     register: function(userData) {
       return $http.post('/signup', userData);
@@ -10,6 +11,20 @@ app.factory('Auth', ['$http', '$state',
     },
     logout: function() {
       return $http.get('/logout');
+    },
+    getUser: function() {
+      return user ? user : null;
+    },
+    setUser: function(newUser) {
+      user = newUser;
+    },
+    student: function() {
+      if (!user) return false;
+      return !user.isTeacher;
+    },
+    teacher: function() {
+      if (!user) return false;
+      return user.isTeacher;
     }
   }
 
@@ -17,14 +32,13 @@ app.factory('Auth', ['$http', '$state',
 
 app.factory('User', ['$http', '$state', '$q',
 function($http, $state, $q) {
-  let user = {};
+  let user;
   return {
     getCurrent: function() {
-      if (!user.username) {
-        user = $http.get('/api/users/current')
-          .then(function(success) {
-            return success.data;
-          });
+      if (!user) {
+        $http.get('/api/users/current').then(function(success) {
+          user = success.data;
+        });
       }
       return user;
     },

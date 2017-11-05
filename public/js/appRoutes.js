@@ -19,7 +19,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
       // Splash Page Home
       .state('home', {
         url: '/',
-        authenticate: { require: false },
         views: {
           'header': {
             templateUrl: 'views/header.html',
@@ -37,7 +36,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
       // Login Page
       .state('home.login', {
         url: 'login',
-        authenticate: { require: false },
         views: {
           'content@': {
             templateUrl: 'views/auth/login.html',
@@ -47,10 +45,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         }
       })
 
-      // Splash Page Home
+      // Main student page
       .state('home.student', {
         url: 'student',
-        authenticate: { require: true, role: 'student' },
+        authenticate: 'student',
         views: {
           'content@': {
             templateUrl: 'views/student.html',
@@ -60,15 +58,25 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         }
       })
 
-      // Splash Page Home
+      // Main teacher page
       .state('home.teacher', {
         url: 'teacher',
-        authenticate: { require: true, role: 'teacher' },
+        authenticate:'teacher',
         views: {
           'content@': {
             templateUrl: 'views/teacher.html',
             controller: 'TeacherCtrl',
             controllerAs: 'vm'
+          }
+        }
+      })
+
+      // Not authorized page
+      .state('home.no-auth', {
+        url: 'no-auth',
+        views: {
+          'content@': {
+            templateUrl: 'views/auth/notAuthorized.html',
           }
         }
       })

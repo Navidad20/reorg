@@ -2,11 +2,8 @@ app = angular.module('AuthCtrl', []);
 app.controller('RegCtrl', ['$rootScope', '$mdDialog', '$scope', 'Auth', 'User',
 function($rootScope, $mdDialog, $scope, Auth, User) {
   var vm = this;
+  vm.user = Auth.getUser();
   vm.userData = {}
-  
-  User.getCurrent().then(function(success) {
-    vm.user = success;
-  });
 
   vm.defaultUserData = {
     firstName: '',
@@ -63,22 +60,18 @@ function($rootScope, $mdDialog, $scope, Auth, User) {
 app.controller('LoginCtrl', ['$state', 'Auth', 'User', '$rootScope',
 function($state, Auth, User, $rootScope) {
   var vm = this;
+  vm.user = Auth.getUser();
 
   vm.userData = {
     username: '',
     password: ''
   }
-  
-  User.getCurrent().then(function(success) {
-    if (success) {
-      vm.user = success.username;
-    }
-  });
 
   vm.submit = () => {
     Auth.login(vm.userData).then(function (success) {
       $rootScope.$broadcast('userLoggedIn');
-      let user = success.data.user; 
+      let user = success.data.user;
+      Auth.setUser(user);
       if (user.isTeacher) $state.go('home.teacher');
       else $state.go('home.student');
     }, function(error) {
