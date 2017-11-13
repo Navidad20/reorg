@@ -1,0 +1,29 @@
+<div ng-include="type"></div>
+
+<script type="text/ng-template" id="sliding-puzzle">
+  <fieldset id="sliding-simple">
+    <legend>Basic</legend>
+    <sliding-puzzle size="3x3" src="../img/angular.png"></sliding-puzzle>
+  </fieldset><br/>
+
+  <fieldset id="sliding-advanced" ng-controller="slidingAdvancedCtrl">
+    <legend>Advanced</legend>
+    <div ng-repeat="puzzle in puzzles">
+      <h2>{{puzzle.title}}</h2>
+      <div class="src">
+        <input type="text" ng-model="puzzle.src"/>
+      </div>
+      <div class="status">
+        moves: <strong>{{puzzle.api.moves}}</strong><br/>
+        solved: <strong>{{puzzle.api.isSolved()}}</strong>
+      </div>
+      <div class="size">
+        rows: <input type="text" ng-model="puzzle.rows" size="2"/>
+        cols: <input type="text" ng-model="puzzle.cols" size="2"/><br/>
+        <button ng-click="puzzle.api.shuffle()">shuffle</button>
+        <button ng-click="puzzle.api.solve()">solve</button>
+      </div>
+      <sliding-puzzle api="puzzle.api" size="{{puzzle.rows}}x{{puzzle.cols}}" src="{{puzzle.src}}"></sliding-puzzle>
+    </div>
+  </fieldset>
+</script>

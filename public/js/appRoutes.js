@@ -70,6 +70,17 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
           }
         }
       })
+      // Game page
+      .state('home.game', {
+        url: 'game1',
+        views: {
+          'content@': {
+            templateUrl: 'views/game.html',
+            controller: 'slidingAdvancedCtrl',
+            controllerAs: 'vm'
+          }
+        }
+      })
 
       // Not authorized page
       .state('home.no-auth', {

@@ -1,4 +1,9 @@
 // public/js/app.js
+
+var types = [
+  { id: 'sliding-puzzle', title: 'Sliding puzzle' },
+  { id: 'word-search-puzzle', title: 'Word search puzzle' }
+];
 angular.module('reOrg', [
   'ngRoute',
   'ngSanitize',
@@ -10,7 +15,8 @@ angular.module('reOrg', [
   'AuthCtrl',
   'ComponentCtrl',
   'NavCtrl',
-  'UserCtrl'
+  'UserCtrl',
+  'GameCtrl'
 ])
 .run(function ($rootScope, $state, Auth) {
   $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
@@ -33,6 +39,15 @@ angular.module('reOrg', [
       else if (role === 'student' && Auth.teacher())
         notAuthorized();
     };
+  });
+})
+.run(function($rootScope, $route, $filter) {
+  $rootScope.types = types;
+  $rootScope.type = types[0].id;
+
+  // set type on route change
+  $rootScope.$on('$routeChangeSuccess', function(event, route) {
+      $rootScope.type = ($filter('filter')(types, { id: route.params.type }).length ? route.params.type : types[0].id);
   });
 });
 
