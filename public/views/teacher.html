@@ -6,7 +6,28 @@
     <md-content>
       <div layout="column" layout-fill layout-padding>
         <!-- Header -->
-        <div layout-padding>
+        <md-card id="profile">
+          <img ng-src="../img/teacher-profile.jpg" class="md-card-image">
+          <div class="profile-image">
+              <i class="material-icons md-36 circle-icon">person</i>
+          </div>
+          <md-card-conent layout="row">
+            <div flex-offset="20" flex="33">
+              <h4>
+                {{vm.userData.firstName}} {{vm.userData.lastName}}
+              </h4>
+              <p>Teacher</p>
+            </div>
+            <div flex="33">
+              <h4>
+                {{vm.userData.courses.length}}
+              </h4>
+              <p>Courses</p>
+            </div>
+          </md-card-conent>
+
+        </md-card>
+        <md-card layout-padding>
           <h3>
             <span class="fa fa-bank"></span>
             <span>Task List</span>
@@ -15,7 +36,7 @@
               Add New Course
             </md-button>
           </h3>
-        </div>
+        </md-card>
         <md-card layout="column" class="tabsdemoDynamicHeight">
           <md-tabs md-dynamic-height md-border-bottom>
             <md-tab label="My Tasks">
