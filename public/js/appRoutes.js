@@ -75,7 +75,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         url: 'game1',
         views: {
           'content@': {
-            templateUrl: 'views/game.html',
+            templateUrl: 'views/game/main.html',
             controller: 'slidingAdvancedCtrl',
             controllerAs: 'vm'
           }

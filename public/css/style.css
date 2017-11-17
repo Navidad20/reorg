@@ -156,6 +156,11 @@ body {
   margin-top: 0;
 }
 
+.reward {
+  height: 150px;
+  text-align: center;
+}
+
 #profile .profile-image {
   width: 110px;
   position: absolute;
@@ -175,6 +180,12 @@ body {
   line-height: 100px;
   vertical-align: middle;
   padding: 30px;
+}
+
+.game-header {
+  border-style: solid;
+  border-width: 1x;
+  padding: 0px;
 }
 
  /* Rules for sizing the icon. */

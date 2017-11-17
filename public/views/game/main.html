@@ -1,0 +1,76 @@
+<div layout="column">
+  <md-card>
+      <div layout="row" layout-align="space-between center">
+        <md-card-title flex="25">
+          <div class="md-headline">Reward Exchange!</div>
+        </md-card-title>
+        <div flex="25" style="text-align: center;">
+          <md-button class="md-primary md-raised">Sizes</md-button>
+        </div>
+        <div flex="25" style="text-align: center;">
+          <md-button class="md-primary md-raised">Images</md-button>
+        </div>
+        <md-card-title flex="25">
+          <div class="md-headline">Reward:</div>
+        </md-card-title>
+      </div>
+    
+    <div layout="row">
+      <md-card class="reward md-whiteframe-15dp" flex="33">
+        <md-card-content>
+          <div class="md-headline">3x3 Puzzle</div>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="center end">
+          <md-button class="md-primary md-raised">Purchase</md-button>
+          <md-button class="md-primary md-raised">Select</md-button>
+        </md-card-actions>
+      </md-card>
+      <md-card class="reward md-whiteframe-15dp" flex="33">
+        <md-card-content>
+          <div class="md-headline">4x4 Puzzle</div>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="center end">
+          <md-button class="md-primary md-raised">Purchase</md-button>
+          <md-button class="md-primary md-raised">Select</md-button>
+        </md-card-actions>
+      </md-card>
+      <md-card class="reward md-whiteframe-15dp" flex="33">
+        <md-card-content>
+          <div class="md-headline">5x5 Puzzle</div>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="center end">
+          <md-button class="md-primary md-raised">Purchase</md-button>
+          <md-button class="md-primary md-raised">Select</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+  </md-card>
+  <div ng-include="type"></div>
+  <script type="text/ng-template" id="sliding-puzzle">
+    <fieldset id="sliding-simple">
+      <legend>Basic</legend>
+      <sliding-puzzle size="3x3" src="../img/gatech-logo.png"></sliding-puzzle>
+    </fieldset><br/>
+  
+    <fieldset id="sliding-advanced" ng-controller="slidingAdvancedCtrl">
+      <legend>Advanced</legend>
+      <div ng-repeat="puzzle in puzzles">
+        <h2>{{puzzle.title}}</h2>
+        <div class="src">
+          <input type="text" ng-model="puzzle.src"/>
+        </div>
+        <div class="status">
+          moves: <strong>{{puzzle.api.moves}}</strong><br/>
+          solved: <strong>{{puzzle.api.isSolved()}}</strong>
+        </div>
+        <div class="size">
+          rows: <input type="text" ng-model="puzzle.rows" size="2"/>
+          cols: <input type="text" ng-model="puzzle.cols" size="2"/><br/>
+          <button ng-click="puzzle.api.shuffle()">shuffle</button>
+          <button ng-click="puzzle.api.solve()">solve</button>
+        </div>
+        <sliding-puzzle api="puzzle.api" size="{{puzzle.rows}}x{{puzzle.cols}}" src="{{puzzle.src}}"></sliding-puzzle>
+      </div>
+    </fieldset>
+  </script>
+</div>
