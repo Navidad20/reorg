@@ -14,7 +14,7 @@
             <md-input-container class="md-block">
               <input type="text" name="description" ng-model="vm.newTask.description" placeholder="Description" required=""/>
             </md-input-container>
-            <md-input-container class="md-block">
+            <md-input-container ng-if="vm.newTask.course" class="md-block">
               <input type="number" name="reward" ng-model="vm.newTask.rewardValue" placeholder="Reward" required=""/>
             </md-input-container>
             <md-button ng-disabled="!Form.$valid" ng-click="vm.submitTask()" class="md-raised md-primary">Submit</md-button>

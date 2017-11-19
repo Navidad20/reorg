@@ -50,6 +50,30 @@ function($http, $state, $q) {
           return $q.reject(error);
       });
     },
+    getCourses: function(username) {
+      return $http.get('/api/users/' + username + '/courses')
+      .then(function(success) {
+          return success.data;
+      }, function(error) {
+          return $q.reject(error);
+      });
+    },
+    getTasks: function(username) {
+      return $http.get('/api/users/' + username + '/mytasks')
+      .then(function(success) {
+          return success.data;
+      }, function(error) {
+          return $q.reject(error);
+      });
+    },
+    put: function(user) {
+      return $http.put('/api/users', user)
+      .then(function(success) {
+          return success.data;
+      }, function(error) {
+          return $q.reject(error);
+      });
+    },
     putCourse: function(username, course) {
       const package = { username: username, course: course };
       return $http.put('/api/users/course', package)
@@ -73,8 +97,24 @@ function($http, $state, $q) {
           return $q.reject(error);
       });
     },
+    getTasks: function(course) {
+      return $http.get('/api/courses/' + course + '/tasks')
+      .then(function(success) {
+          return success.data;
+      }, function(error) {
+          return $q.reject(error);
+      });
+    },
     post: function(course) {
       return $http.post('/api/courses', course)
+      .then(function(success) {
+          return success.data;
+      }, function(error) {
+          return $q.reject(error);
+      });
+    },
+    put: function(course) {
+      return $http.put('/api/courses', course)
       .then(function(success) {
           return success.data;
       }, function(error) {
@@ -89,7 +129,15 @@ function($http, $state, $q) {
       }, function(error) {
           return $q.reject(error);
       });
-    }
+    },
+    delete: function(course) {
+      return $http.delete('/api/courses/' + course)
+      .then(function(success) {
+          return success.data;
+      }, function(error) {
+          return $q.reject(error);
+      });
+    },
   }
 }]);
 
@@ -111,6 +159,22 @@ function($http, $state, $q) {
       }, function(error) {
           return $q.reject(error);
       });
-    }
+    },
+    put: function(task) {
+      return $http.put('/api/tasks', task)
+      .then(function(success) {
+          return success.data;
+      }, function(error) {
+          return $q.reject(error);
+      });
+    },
+    delete: function(taskID) {
+      return $http.delete('/api/tasks/' + taskID)
+      .then(function(success) {
+          return success.data;
+      }, function(error) {
+          return $q.reject(error);
+      });
+    },
   }
 }]);

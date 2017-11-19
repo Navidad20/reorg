@@ -30,7 +30,7 @@
         <md-card layout-padding>
           <h3>
             <span class="fa fa-bank"></span>
-            <span>Task List</span>
+            <span>Courses</span>
             <md-button class="md-raised md-primary" ng-click="vm.addCourse()">
               <span class="fa fa-plus">&nbsp;</span>
               Add New Course
@@ -40,36 +40,94 @@
         <md-card layout="column" class="tabsdemoDynamicHeight">
           <md-tabs md-dynamic-height md-border-bottom>
             <md-tab label="My Tasks">
-              <md-content class="md-padding">
-                <h1 class="md-display-2">Tab One</h1>
-                <p>Hola</p>
+              <md-card-content layout-padding>
+                <div layout="row">
+                  <h2 flex="50" class="md-display-2">My Tasks</h2>
+                  <div flex="50" layout="row"  layout-align="end center">
+                    <div>
+                      <md-button class="md-raised md-primary" ng-click="vm.addTask('', false, true)">
+                        <span class="fa fa-plus">&nbsp;</span>
+                        Add New Task
+                      </md-button>
+                    </div>
+                  </div>
+                </div>
+              </md-card-content>
+              <md-content layout="row">
+                <md-list flex="50">
+                  <md-card ng-repeat="task_id in vm.userData.myTasks">
+                    <md-list-item class="md-3-line" ng-click="vm.setTask(task_id)">
+                      <div class="md-list-item-text" layout="column">
+                        <h3>{{ vm.tasks[task_id].title }}</h3>
+                      </div>
+                      <md-checkbox 
+                        class="md-secondary"
+                        ng-click="vm.updateUser()"
+                        ng-model="vm.userData.tasks[task_id]">
+                      </md-checkbox>
+                    </md-list-item>
+                  </md-card>
+                </md-list>
+                <md-card flex="50" ng-if="vm.currentTask">
+                  <md-card-content>
+                    <h3>{{ vm.currentTask.title }}</h3>
+                    <br>
+                    <h4>Description:</h4>
+                    <p>{{ vm.currentTask.description }}</p>
+                  </md-card-content>
+                  <md-card-actions layout="row" layout-align="center end">
+                    <md-button class="md-warn md-raised" ng-click="vm.addTask('', true)">
+                      Edit Task
+                    </md-button>
+                    <md-button class="md-accent md-raised md-hue-2" ng-click="vm.deleteTask()">
+                      Delete Task
+                    </md-button>
+                  </md-card-actions>
+                </md-card>
               </md-content>
             </md-tab>
             <md-tab 
-              label="{{course.title}}" 
-              ng-repeat="course in vm.userData.courses"
-              ng-click="vm.setCourse(course._id)">
+              label="{{vm.courses[course_id].title}}" 
+              ng-repeat="course_id in vm.userData.courses"
+              ng-click="vm.resetTask()">
+              <md-card-content layout-padding>
+                <div layout="row">
+                  <h2 flex="50" class="md-display-2">{{vm.courses[course_id].title}}</h2>
+                  <div flex="50" layout="row"  layout-align="end center">
+                    <div>
+                      <md-button class="md-raised md-primary" ng-click="vm.addTask(course_id)">
+                        <span class="fa fa-plus">&nbsp;</span>
+                        Add New Task
+                      </md-button>
+                    </div>
+                    <div>
+                      <md-button class="md-raised md-warn" ng-click="vm.addCourse(course_id)">
+                        Edit Course
+                      </md-button>
+                    </div>
+                    <div>
+                      <md-button class="md-raised md-accent md-hue-2" ng-click="vm.deleteCourse(course_id)">
+                        Delete Course
+                      </md-button>
+                    </div>
+                  </div>
+                </div>
+                <p>{{vm.courses[course_id].description}}</p>
+              </md-card-content>
               <md-content layout="row">
                 <md-list flex="50">
-                  <md-card ng-repeat="task in vm.currentCourse.tasks">
-                    <teacher-task-item 
-                      task=task
-                      on-set="vm.setTask(item)"
-                      on-edit="vm.editTask(item)"
-                      on-delete="vm.deleteTask(item)">
-                    </teacher-task-item>
+                  <md-card ng-repeat="task_id in vm.courses[course_id].tasks">
+                    <md-list-item class="md-3-line" ng-click="vm.setTask(task_id)">
+                      <div class="md-list-item-text" layout="column">
+                        <h3>{{ vm.tasks[task_id].title }}</h3>
+                      </div>
+                      <div class="md-list-item-text" layout="column">
+                        <h3>Reward: {{ vm.tasks[task_id].rewardValue }}</h3>
+                      </div>
+                    </md-list-item>
                   </md-card>
-                  <md-button class="md-raised md-primary" ng-click="vm.addTask()">
-                    <span class="fa fa-plus">&nbsp;</span>
-                    Add New Task
-                  </md-button>
                 </md-list>
                 <md-card flex="50" ng-if="vm.currentTask">
-                  <!-- <md-card-title>
-                    <md-card-title-text>
-                      <span class="md-headline">{{ vm.currentTask.title }}</span>
-                    </md-card-title-text>
-                  </md-card-title> -->
                   <md-card-content>
                     <h3>{{ vm.currentTask.title }}</h3>
                     <br>
@@ -78,6 +136,14 @@
                     <h4>Reward:</h4>
                     <p>{{ vm.currentTask.rewardValue }}</p>
                   </md-card-content>
+                  <md-card-actions layout="row" layout-align="center end">
+                    <md-button class="md-warn md-raised" ng-click="vm.addTask('', true)">
+                      Edit Task
+                    </md-button>
+                    <md-button class="md-accent md-raised md-hue-2">
+                      Delete Task
+                    </md-button>
+                  </md-card-actions>
                 </md-card>
               </md-content>
             </md-tab>

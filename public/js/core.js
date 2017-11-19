@@ -49,5 +49,8 @@ angular.module('reOrg', [
   $rootScope.$on('$routeChangeSuccess', function(event, route) {
       $rootScope.type = ($filter('filter')(types, { id: route.params.type }).length ? route.params.type : types[0].id);
   });
+})
+.config(function($mdAriaProvider) {
+  $mdAriaProvider.disableWarnings();
 });
 

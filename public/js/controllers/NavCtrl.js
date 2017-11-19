@@ -7,9 +7,20 @@ function($state, $rootScope, User, Auth) {
 
 	vm.logout = () => {
 		Auth.logout().then(function(success) {
-			if (success) $state.go('home');
+      Auth.setUser(null);
+      vm.user = null;
+      if (success) 
+        $state.go('home');
 		})
-	};
+  };
+  
+  vm.taskManager = () => {
+    if (vm.user.isTeacher) {
+      $state.go('home.teacher')
+    } else {
+      $state.go('home.student')
+    }
+  }
 
 	$rootScope.$on('userLoggedIn', function () {
     vm.user = Auth.getUser();

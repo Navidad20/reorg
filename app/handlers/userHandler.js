@@ -1,11 +1,14 @@
 const User = require('../models/user');
 const Course = require('../models/course');
+const Task = require('../models/task');
 const mongoose = require('mongoose');
 
 module.exports = {
   current,
   allGet,
   singleGet,
+  getCourses,
+  getTasks,
   singlePost,
   singlePut,
   singlePutCourse,
@@ -35,17 +38,57 @@ function singleGet(req, res) {
     const username = req.params.user;
     User.findOne({ username: username }, (error, user) => {
       if (error) res.status(500).send(error);
+      else res.json(user);
+    });
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+function getCourses(req, res) {
+  if (true) {
+    const username = req.params.user;
+    User.findOne({ username: username }, (error, user) => {
+      if (error) res.status(500).send(error);
       else {
         if (user) {
           Course.find({ _id : { $in : user.courses }}, (error, courses) => {
             if (error) res.status(500).send(error);
             else {
-              user.courses = courses;
-              res.json(user);
+              let courseMap = {}
+              for (let i = 0; i < courses.length; i++)
+                courseMap[courses[i]._id] = courses[i]
+              res.json(courseMap);
             }
           });
         } else {
-          res.json(user);
+          res.status(404).send(error);
+        }
+      }
+    });
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+function getTasks(req, res) {
+  if (true) {
+    const username = req.params.user;
+    User.findOne({ username: username }, (error, user) => {
+      if (error) res.status(500).send(error);
+      else {
+        if (user) {
+          Task.find({ _id : { $in : user.myTasks } }, (error, tasks) => {
+            if (error) res.status(500).send(error);
+            else {
+              let taskMap = {};
+              for (let i = 0; i < tasks.length; i++)
+                taskMap[tasks[i]._id] = tasks[i];
+              res.json(taskMap);
+            }
+          });
+        } else {
+          res.status(404).send(error);
         }
       }
     });

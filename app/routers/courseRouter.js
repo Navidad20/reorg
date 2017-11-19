@@ -17,4 +17,7 @@ CourseRouter.route('/:course')
   .get(course.singleGet)
   .delete(course.singleDelete);
 
+CourseRouter.route('/:course/tasks')
+  .get(course.getTasks);
+
 module.exports = CourseRouter;

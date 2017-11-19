@@ -24,7 +24,7 @@ function allGet(req, res) {
 // Get a single task
 function singleGet(req, res) {
   if (true) {
-    const taskId = req.params.taskId;
+    const taskId = req.params.task;
     Task.find({ _id: taskId }, (error, task) => {
       if (error) res.status(500).send(error);
       else if (task.length === 0) res.sendStatus(404);
@@ -43,16 +43,6 @@ function singlePost(req, res) {
       (error, task) => {
         if (error) res.status(500).send(error);
         else res.status(201).json(task);
-        // else {
-        //   Course.update(
-        //     { _id : task.courseID },
-        //     { $push : { tasks : task._id } },
-        //     (error, response) => {
-        //       if (error) res.status(500).send(error);
-        //       else res.status(201).json(task)
-        //     }
-        //   );
-        // };
       });
   } else {
     res.sendStatus(401);
@@ -62,10 +52,10 @@ function singlePost(req, res) {
 // Update a single task
 function singlePut(req, res) {
   if (true) {
-    const taskId = req.body.taskId;
+    const taskID = req.body._id;
     const task = req.body;
     Task.update(
-      { _id: taskId },
+      { _id: taskID },
       { $set: task },
       (error, response) => {
         if (error) res.status(500).send(error);
@@ -80,7 +70,7 @@ function singlePut(req, res) {
 // Delete a single task
 function singleDelete(req, res) {
   if (true) {
-    const taskId = req.body.taskId;
+    const taskId = req.params.task;
     Task.remove({ _id: taskId }, (error, response) => {
       if (error) res.status(500).send(error);
       else if (response.result.n === 0) res.sendStatus(404);

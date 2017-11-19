@@ -6,6 +6,7 @@ const Task = require('../models/task');
 module.exports = {
   allGet,
   singleGet,
+  getTasks,
   singlePost,
   singlePut,
   singlePutTask,
@@ -30,12 +31,26 @@ function singleGet(req, res) {
     const courseID = req.params.course;
     Course.findOne({ _id: courseID }, (error, course) => {
       if (error) res.status(500).send(error);
+      else res.json(course);
+    });
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+function getTasks(req, res) {
+  if (true) {
+    const courseID = req.params.course;
+    Course.findOne({ _id: courseID }, (error, course) => {
+      if (error) res.status(500).send(error);
       else {
         Task.find({ _id : { $in : course.tasks } }, (error, tasks) => {
           if (error) res.status(500).send(error);
           else {
-            course.tasks = tasks;
-            res.json(course);
+            let taskMap = {};
+            for (let i = 0; i < tasks.length; i++)
+              taskMap[tasks[i]._id] = tasks[i];
+            res.json(taskMap);
           }
         });
       }
@@ -79,16 +94,7 @@ function singlePutTask(req, res) {
       (error, response) => {
         if (error) res.status(500).send(error);
         else if (response.n === 0) res.sendStatus(404);
-        else {
-          User.update(
-            { courses : course , isTeacher : false },
-            { $push : { tasks : { task : task._id, complete : false } } },
-            (error, success) => {
-              if (error) res.status(500).send(error);
-              else res.sendStatus(200);
-            }
-          )
-        };
+        else res.sendStatus(200);
       });
   } else {
     res.sendStatus(401);
@@ -98,7 +104,7 @@ function singlePutTask(req, res) {
 // Update a single course
 function singlePut(req, res) {
   if (true) {
-    const courseId = req.body.courseId;
+    const courseId = req.body._id;
     const course = req.body;
     Course.update(
       { _id: courseId },
@@ -116,8 +122,8 @@ function singlePut(req, res) {
 // Delete a single course
 function singleDelete(req, res) {
   if (true) {
-    const title = req.body.title;
-    Course.remove({ title: title }, (error, response) => {
+    const courseID = req.params.course;
+    Course.remove({ _id: courseID }, (error, response) => {
       if (error) res.status(500).send(error);
       else if (response.result.n === 0) res.sendStatus(404);
       else res.sendStatus(200);

@@ -27,11 +27,11 @@ const UserSchema = new Schema({
     default: []
   },
   tasks: {
-    type: [{
-      task: String,
-      complete: Boolean,
-      task: {}
-    }],
+    type: {},
+    default: {}
+  },
+  myTasks: {
+    type: [],
     default: []
   },
   totalReward: {

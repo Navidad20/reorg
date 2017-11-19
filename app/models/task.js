@@ -12,7 +12,7 @@ const TaskSchema = new Schema({
   },
   course: {
     type: String,
-    required: true
+    required: false
   },
   dueDate: {
     type: Date,

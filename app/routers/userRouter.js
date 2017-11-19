@@ -20,4 +20,10 @@ UserRouter.route('/:user')
   .get(user.singleGet)
   .delete(user.singleDelete);
 
+UserRouter.route('/:user/courses')
+  .get(user.getCourses);
+
+UserRouter.route('/:user/mytasks')
+  .get(user.getTasks);
+
 module.exports = UserRouter;
