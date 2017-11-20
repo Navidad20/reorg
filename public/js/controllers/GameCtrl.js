@@ -1,11 +1,13 @@
 app = angular.module('GameCtrl', []);
-app.controller('slidingAdvancedCtrl', function($scope) {
+app.controller('slidingAdvancedCtrl', ['$scope', 'Auth', 'User',
+function($scope, Auth, User) {
+  
   $scope.puzzles = [
       { src: '../../img/misko.jpg', title: 'Miško Hevery', rows: 4, cols: 4 },
       { src: '../../img/igor.jpg', title: 'Igor Minár', rows: 3, cols: 3 },
       { src: '../../img/vojta.jpg', title: 'Vojta Jína', rows: 4, cols: 3 }
   ];
-});
+}]);
 app.factory('slidingPuzzle', function() {
     function shuffle(a) {
         var q;

@@ -72,7 +72,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
       })
       // Game page
       .state('home.game', {
-        url: 'game1',
+        url: 'game',
+        authenticate:'student',
         views: {
           'content@': {
             templateUrl: 'views/game/main.html',

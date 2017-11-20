@@ -1,0 +1,18 @@
+<md-dialog flex="40">
+    <md-content layout="row" layout-align="space-around" layout-padding="layout-padding" ng-cloak="ng-cloak" class="login-form">
+      <md-card flex="flex">
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <h2><span>Course List</span></h2>
+          </div>
+        </md-toolbar>
+        <md-card-content>
+          <md-list flex>
+            <md-list-item ng-repeat="course in vm.courseList" ng-click="vm.submitCourse(course)">
+              {{course.title}}
+            </md-list-item>  
+          </md-list>
+        </md-card-content>
+      </md-card>
+    </md-content>
+  </md-dialog>

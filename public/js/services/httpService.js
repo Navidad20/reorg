@@ -97,6 +97,14 @@ function($http, $state, $q) {
           return $q.reject(error);
       });
     },
+    getAll: function() {
+      return $http.get('/api/courses')
+      .then(function(success) {
+          return success.data;
+      }, function(error) {
+          return $q.reject(error);
+      });
+    },
     getTasks: function(course) {
       return $http.get('/api/courses/' + course + '/tasks')
       .then(function(success) {

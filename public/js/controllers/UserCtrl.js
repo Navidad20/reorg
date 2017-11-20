@@ -1,55 +1,178 @@
 app = angular.module('UserCtrl', []); 
 
-app.controller('StudentCtrl', ['$timeout', '$mdSidenav', '$mdDialog', 'Auth', 'User', 'Course', 'Task',
-function($timeout, $mdSidenav, $mdDialog, Auth, User, Course, Task) {
+app.controller('StudentCtrl', ['$scope', '$timeout', '$mdDialog', 'Auth', 'User', 'Course', 'Task',
+function($scope, $timeout, $mdDialog, Auth, User, Course, Task) {
   var vm = this;
   vm.user = Auth.getUser();
-  vm.currentCourse = null;
   vm.currentTask = null;
+  vm.newTask = {};
+  vm.courseList = [];
 
-  User.get(vm.user.username).then(function(success) {
-    vm.userData = success;
-  });
+  vm.defaultTask = {
+    title : '',
+    description : '',
+    rewardValue : 0
+  };
 
-  vm.setCourse = function(course) {
-    Course.get(course).then(function(success) {
-      vm.currentCourse = success;
-      vm.currentTask = null;
+  vm.getData = () => {
+    User.get(vm.user.username).then(function(userData) {
+      vm.userData = userData;
+      vm.tasks = {}
+      User.getCourses(vm.user.username).then(function(courses) {
+        vm.courses = courses;
+        Object.keys(vm.courses).forEach((key, index) => {
+          Course.getTasks(key).then(function(tasks) {
+            vm.tasks = Object.assign(vm.tasks, tasks);
+          });
+        });
+      });
+      User.getTasks(vm.user.username).then(function(tasks) {
+        vm.tasks = Object.assign(vm.tasks, tasks);
+      })
+    });
+  };
+
+  vm.getData();
+
+  vm.getCourses = () => {
+    Course.getAll().then(function(courses) {
+      vm.courseList = courses.filter(function(course) {
+        return vm.userData.courses.indexOf(course._id) == -1;
+      })
     });
   }
 
   vm.setTask = function(task) {
-    vm.currentTask = task;
+    vm.currentTask = vm.tasks[task];
+  }
+  vm.resetTask = function() {
+    vm.currentTask = null;
   }
 
-  vm.close = function () {
-    $mdSidenav('left').close()
+  vm.addTask = (edit=false) => {
+    vm.newTask = {};
+    if (edit) {
+      angular.copy(vm.currentTask, vm.newTask)
+    } else {
+      angular.copy(vm.defaultTask, vm.newTask)
+      vm.newTask.course = '';
+    }
+    
+    $mdDialog.show(
+      {
+        templateUrl: "views/forms/task.html",
+        clickOutsideToClose: true,
+        scope: $scope,
+        preserveScope: true,
+        controller: function($scope) {
+       },
+    });
+  }
+
+  vm.submitTask = () => {
+    if ('_id' in vm.newTask) {
+      Task.put(vm.newTask).then(function(success) {
+        vm.tasks[vm.newTask._id] = vm.newTask;
+        vm.currentTask = vm.newTask;
+        console.log('Updated!');
+      });
+    } else {
+      Task.post(vm.newTask).then(function(task) {
+        vm.tasks[task._id] = task;
+        vm.userData.myTasks.push(task._id);
+        if (vm.userData.tasks) {
+          vm.userData.tasks[task._id] = false;
+        } else {
+          vm.userData.tasks = { [task._id] : false }
+        }
+        vm.updateUser();      
+      });
+    };
+    vm.closeDialog();
+  };  
+
+  vm.addCourse = () => {
+    vm.getCourses();
+    $mdDialog.show(
+      {
+        templateUrl: "views/forms/courseList.html",
+        clickOutsideToClose: true,
+        scope: $scope,
+        preserveScope: true,
+        controller: function ($scope) {
+        },
+      });
+  }
+
+  vm.submitCourse = (course) => {
+    vm.userData.courses.push(course._id);
+    vm.courses[course._id] = course;
+    Course.getTasks(course._id).then(function(tasks) {
+      vm.tasks = Object.assign(vm.tasks, tasks);
+    });
+    vm.updateUser();
+    vm.closeDialog();
   };
-  
-  vm.toggleLeft = buildDelayedToggler('left');
-  
-  function debounce(func, wait, context) {
-    var timer;
-    return function debounced() {
-       var context = vm;
-       var args = Array.prototype.slice.call(arguments);
-       $timeout.cancel(timer);
-       timer = $timeout(function() {
-          timer = undefined;
-          func.apply(context, args);
-       }, wait || 10);
+
+  vm.closeDialog = () => {
+    $mdDialog.cancel();
+  };
+
+
+
+  vm.deleteTask = () => {
+    let task = vm.currentTask;
+    Task.delete(task._id).then(function(success) {
+      console.log('Deleted Task!');
+      if (task.course) {
+        let index = vm.courses[task.course].tasks.indexOf(task._id)
+        delete vm.tasks[task._id];
+        if (index > -1) {
+          let course = vm.courses[task.course]
+          course.tasks.splice(index, 1);
+          Course.put(course).then(function(success) {
+            console.log('Course updated');
+          });
+        };
+      } else {
+        let index = vm.userData.myTasks.indexOf(task._id)
+        delete vm.tasks[task._id];
+        if (index > -1) {
+          vm.userData.myTasks.splice(index, 1);
+          vm.updateUser();
+        };
+      }
+    });
+    vm.currentTask = null;
+  };
+
+  vm.deleteCourse = (course) => {
+    let index = vm.userData.courses.indexOf(course)
+    delete vm.courses[course];
+    if (index > -1) {
+      vm.userData.courses.splice(index, 1);
+      vm.updateUser();
     };
   };
 
-  function buildDelayedToggler(navID) {
-    return debounce(function() {
-      $mdSidenav(navID).toggle();
-    }, 200);
+  vm.checkBox = (task) => {
+    if (vm.userData.tasks[task]) {
+      vm.userData.totalReward += vm.tasks[task].rewardValue;
+    } else {
+      vm.userData.totalReward -= vm.tasks[task].rewardValue;
+    }
+    vm.updateUser();
+  }
+
+  vm.updateUser = () => {
+    User.put(vm.userData).then(function(success) {
+      console.log('Updated User!')
+    });
   };
 }]);
 
-app.controller('TeacherCtrl', ['$scope', '$timeout', '$mdSidenav', '$mdDialog', 'Auth', 'User', 'Course', 'Task',
-function($scope, $timeout, $mdSidenav, $mdDialog, Auth, User, Course, Task) {
+app.controller('TeacherCtrl', ['$scope', '$mdDialog', 'Auth', 'User', 'Course', 'Task',
+function($scope, $mdDialog, Auth, User, Course, Task) {
   var vm = this;
   vm.user = Auth.getUser();
   vm.currentTask = null;
@@ -129,7 +252,7 @@ function($scope, $timeout, $mdSidenav, $mdDialog, Auth, User, Course, Task) {
       Task.post(vm.newTask).then(function(task) {
         vm.tasks[task._id] = task;
         vm.userData.myTasks.push(task._id);
-        if (userData.tasks) {
+        if (vm.userData.tasks) {
           vm.userData.tasks[task._id] = false;
         } else {
           vm.userData.tasks = { [task._id] : false }
