@@ -15,10 +15,10 @@ const routes = require('./app/routes');
 const app = express();
 
 // Set port or check environment
-const port = process.env.API_PORT || 3001;
+const port = process.env.API_PORT || 3000;
 
 // MongoDB Configuration
-mongoose.connect(process.env.MONGO_URL || config.mongodb.localhost, {
+mongoose.connect(process.env.MONGO_URL || config.mongodb.aws, {
   useMongoClient : true
 });
 
