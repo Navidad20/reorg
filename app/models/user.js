@@ -38,6 +38,34 @@ const UserSchema = new Schema({
     type: Number,
     min: 0,
     default: 0
+  },
+  game: {
+    store: {
+      three: {
+        type: Boolean,
+        default: true
+      },
+      four: {
+        type: Boolean,
+        default: false
+      },
+      five: {
+        type: Boolean,
+        default: false
+      },
+      gt: {
+        type: Boolean,
+        default: true
+      },
+      edu: {
+        type: Boolean,
+        default: false
+      },
+      joyner: {
+        type: Boolean,
+        default: false
+      }
+    }
   }
 }, {
   timestamps: true

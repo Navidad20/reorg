@@ -46,7 +46,7 @@ function singleGet(req, res) {
 }
 
 function getCourses(req, res) {
-  if (true) {
+  if (req.user) {
     const username = req.params.user;
     User.findOne({ username: username }, (error, user) => {
       if (error) res.status(500).send(error);
@@ -72,7 +72,7 @@ function getCourses(req, res) {
 }
 
 function getTasks(req, res) {
-  if (true) {
+  if (req.user) {
     const username = req.params.user;
     User.findOne({ username: username }, (error, user) => {
       if (error) res.status(500).send(error);
@@ -99,7 +99,7 @@ function getTasks(req, res) {
 
 // Post a single user
 function singlePost(req, res) {
-  if (true) {
+  if (req.user) {
     const newUser = req.body;
     User.create(newUser,
       (error, response) => {
@@ -113,7 +113,7 @@ function singlePost(req, res) {
 
 // Update a single user
 function singlePut(req, res) {
-  if (true) {
+  if (req.user) {
     const username = req.body.username;
     const user = req.body;
     User.update(
@@ -131,7 +131,7 @@ function singlePut(req, res) {
 
 // Update a single user
 function singlePutCourse(req, res) {
-  if (true) {
+  if (req.user) {
     const username = req.body.username;
     const course = req.body.course;
     User.update(
@@ -149,7 +149,7 @@ function singlePutCourse(req, res) {
 
 // Delete a single user
 function singleDelete(req, res) {
-  if (true) {
+  if (req.user) {
     const username = req.params.user;
     User.remove({ username: username }, (error, response) => {
       if (error) res.status(500).send(error);

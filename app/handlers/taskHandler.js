@@ -37,7 +37,7 @@ function singleGet(req, res) {
 
 // Post a single task
 function singlePost(req, res) {
-  if (true) {
+  if (req.user) {
     const newTask = req.body;
     Task.create(newTask,
       (error, task) => {
@@ -51,7 +51,7 @@ function singlePost(req, res) {
 
 // Update a single task
 function singlePut(req, res) {
-  if (true) {
+  if (req.user) {
     const taskID = req.body._id;
     const task = req.body;
     Task.update(
@@ -69,7 +69,7 @@ function singlePut(req, res) {
 
 // Delete a single task
 function singleDelete(req, res) {
-  if (true) {
+  if (req.user) {
     const taskId = req.params.task;
     Task.remove({ _id: taskId }, (error, response) => {
       if (error) res.status(500).send(error);

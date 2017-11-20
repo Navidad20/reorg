@@ -62,7 +62,7 @@ function getTasks(req, res) {
 
 // Post a single course
 function singlePost(req, res) {
-  if (true) {
+  if (req.user) {
     const newCourse = req.body;
     Course.create(newCourse,
       (error, response) => {
@@ -85,7 +85,7 @@ function singlePost(req, res) {
 }
 
 function singlePutTask(req, res) {
-  if (true) {
+  if (req.user) {
     const course = req.body.course;
     const task = req.body.task;
     Course.update(
@@ -103,7 +103,7 @@ function singlePutTask(req, res) {
 
 // Update a single course
 function singlePut(req, res) {
-  if (true) {
+  if (req.user) {
     const courseId = req.body._id;
     const course = req.body;
     Course.update(
@@ -121,7 +121,7 @@ function singlePut(req, res) {
 
 // Delete a single course
 function singleDelete(req, res) {
-  if (true) {
+  if (req.user) {
     const courseID = req.params.course;
     Course.remove({ _id: courseID }, (error, response) => {
       if (error) res.status(500).send(error);

@@ -1,12 +1,46 @@
 app = angular.module('GameCtrl', []);
 app.controller('slidingAdvancedCtrl', ['$scope', 'Auth', 'User',
 function($scope, Auth, User) {
-  
-  $scope.puzzles = [
-      { src: '../../img/misko.jpg', title: 'Miško Hevery', rows: 4, cols: 4 },
-      { src: '../../img/igor.jpg', title: 'Igor Minár', rows: 3, cols: 3 },
-      { src: '../../img/vojta.jpg', title: 'Vojta Jína', rows: 4, cols: 3 }
-  ];
+  var vm = this;
+  vm.user = Auth.getUser();
+  vm.showSizes = true;
+  vm.store = {
+    sizes: [
+      {title: '3x3', rows: 3, cols: 3, cost:0},
+      {title: '4x4', rows: 4, cols: 4, cost:10},
+      {title: '5x5', rows: 5, cols: 5, cost:20}
+    ],
+    images: [
+      {title: 'GT Logo', src:'../../img/gatech-logo.png', cost:0},
+      {title: 'Educational Technology', src:'../../img/edu-tech.png', cost:10},
+      {title: 'David Joyner', src:'../../img/david-joyner.png', cost:20}
+    ]
+  }
+  vm.puzzle = {
+    size: '3x3',
+    src: '../../img/gatech-logo.png',
+    title: 'GT Logo'
+  }
+
+  vm.getData = () => {
+    User.get(vm.user.username).then(function(success) {
+      console.log(success);
+      vm.userData = success;
+    })
+  };
+  vm.getData();
+
+  vm.flipShowSize = () => {
+    vm.showSizes = !vm.showSizes;
+  }
+
+  vm.setSize = (size) => {
+    vm.puzzle.size = size.title;
+  }
+  vm.setImage = (image) => {
+    vm.puzzle.src = image.src;
+    vm.puzzle.title = image.title;
+  }
 }]);
 app.factory('slidingPuzzle', function() {
     function shuffle(a) {

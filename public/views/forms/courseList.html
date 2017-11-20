@@ -7,11 +7,14 @@
           </div>
         </md-toolbar>
         <md-card-content>
-          <md-list flex>
+          <md-list ng-if="vm.courseList.length" flex>
             <md-list-item ng-repeat="course in vm.courseList" ng-click="vm.submitCourse(course)">
               {{course.title}}
             </md-list-item>  
           </md-list>
+          <md-card-content ng-if="!vm.courseList.length">
+            No Available Courses
+          </md-card-content>
         </md-card-content>
       </md-card>
     </md-content>
