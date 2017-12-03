@@ -12,7 +12,15 @@
             <input type="text" name="title" ng-model="vm.newCourse.title" placeholder="Course Title" required=""/>
           </md-input-container>
           <md-input-container class="md-block">
-            <input type="text" name="description" ng-model="vm.newCourse.description" placeholder="Description" required=""/>
+            <textarea
+              name="Description"
+              type="text"
+              rows="5"
+              ng-model="vm.newCourse.description"
+              placeholder="Description"
+              required="" 
+              md-select-on-focus>
+            </textarea>
           </md-input-container>
           <md-button ng-disabled="!Form.$valid" ng-click="vm.submitCourse()" class="md-raised md-primary">Submit</md-button>
           <md-button ng-click="vm.closeDialog()" class="md-raised md-danger">Cancel</md-button>

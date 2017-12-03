@@ -9,7 +9,9 @@
         <h2 flex md-truncate>
           <a ui-sref="home">ReOrg</a>
         </h2>
-
+        <md-button ui-sref="home.about">
+          About
+        </md-button>
         <md-button ng-if="vm.user.username" ng-click="vm.taskManager()">
           Task Manager  
         </md-button>

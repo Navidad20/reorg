@@ -34,6 +34,18 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
       })
 
       // Login Page
+      .state('home.about', {
+        url: 'about',
+        views: {
+          'content@': {
+            templateUrl: 'views/about.html',
+            // controller: 'AboutCtrl',
+            // controllerAs: 'vm'
+          }
+        }
+      })
+
+      // Login Page
       .state('home.login', {
         url: 'login',
         views: {

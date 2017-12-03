@@ -12,8 +12,15 @@
               <input type="text" name="title" ng-model="vm.newTask.title" placeholder="Task Title" required=""/>
             </md-input-container>
             <md-input-container class="md-block">
-              <input type="text" name="description" ng-model="vm.newTask.description" placeholder="Description" required=""/>
-            </md-input-container>
+              <textarea
+                name="Description"
+                type="text"
+                rows="5"
+                ng-model="vm.newTask.description"
+                placeholder="Description"
+                required="" 
+                md-select-on-focus>
+              </textarea>
             <md-input-container ng-if="vm.newTask.course" class="md-block">
               <input type="number" name="reward" ng-model="vm.newTask.rewardValue" placeholder="Reward" required=""/>
             </md-input-container>
