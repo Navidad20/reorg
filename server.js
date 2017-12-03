@@ -18,7 +18,7 @@ const app = express();
 const port = process.env.API_PORT || 3000;
 
 // MongoDB Configuration
-mongoose.connect(process.env.MONGO_URL || config.mongodb.aws, {
+mongoose.connect(process.env.MONGO_URL || config.mongodb.localhost, {
   useMongoClient : true
 });
 

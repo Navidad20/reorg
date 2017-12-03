@@ -22,8 +22,18 @@
           <div class="md-headline">Cost: {{size.cost}}</div>
         </md-card-content>
         <md-card-actions layout="row" layout-align="center end">
-          <md-button class="md-primary md-raised">Purchase</md-button>
-          <md-button ng-click="vm.setSize(size)" class="md-primary md-raised">Select</md-button>
+          <md-button
+            ng-disabled="vm.userData.game.store[size.value]"
+            ng-click="vm.purchase(size)"
+            class="md-primary md-raised">
+            Purchase
+          </md-button>
+          <md-button
+            ng-disabled="!vm.userData.game.store[size.value]"
+            ng-click="vm.setSize(size)"
+            class="md-primary md-raised">
+            Select
+          </md-button>
         </md-card-actions>
       </md-card>
     </div>
@@ -34,8 +44,18 @@
           <div class="md-headline">Cost: {{image.cost}}</div>
         </md-card-content>
         <md-card-actions layout="row" layout-align="center end">
-          <md-button class="md-primary md-raised">Purchase</md-button>
-          <md-button ng-click="vm.setImage(image)" class="md-primary md-raised">Select</md-button>
+          <md-button 
+            ng-click="vm.purchase(image)"
+            ng-disabled="vm.userData.game.store[image.value]"
+            class="md-primary md-raised">
+            Purchase
+          </md-button>
+          <md-button
+            ng-disabled="!vm.userData.game.store[image.value]"
+            ng-click="vm.setImage(image)"
+            class="md-primary md-raised">
+            Select
+          </md-button>
         </md-card-actions>
       </md-card>
     </div>
