@@ -1,3 +1,3 @@
 ## ReOrg
 
-A reward based task manager.
+A gamified task manager.
